@@ -232,9 +232,11 @@ const JourneyIntro = () => {
 
               {/* Lesson Illustration */}
               <div className="flex justify-center my-8">
-                <div className="w-48 h-48 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <BookOpen className="w-24 h-24 text-primary" />
-                </div>
+                <img 
+                  src={expressionsImage} 
+                  alt="Algebraic expressions and variables" 
+                  className="w-full max-w-2xl rounded-2xl shadow-lg"
+                />
               </div>
 
               {/* Real-World Examples Preview */}
