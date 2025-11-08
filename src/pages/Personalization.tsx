@@ -73,7 +73,7 @@ const Personalization = () => {
   const canContinue = () => {
     if (currentStep === 1) return selectedAvatar !== null;
     if (currentStep === 2) return selectedCompanion !== "";
-    return selectedInterests.length >= 3;
+    return selectedInterests.length >= 2;
   };
 
   const stepProgress = (currentStep / 3) * 100;
@@ -105,8 +105,8 @@ const Personalization = () => {
           emoji: "🎨",
           message: (
             <div className="space-y-2">
-              <p className="font-bold text-lg">Last step - tell us what you love! ❤️</p>
-              <p>We'll use your interests to create math problems about things you actually care about. Way more fun than boring textbook examples!</p>
+                <p className="font-bold text-lg">Last step - tell us what you love! ❤️</p>
+                <p>Pick your top 2 favorites! We'll create math problems about things you actually care about. Way more fun than boring textbook examples!</p>
             </div>
           )
         };
@@ -224,7 +224,7 @@ const Personalization = () => {
               <div className="text-center">
                 <h2 className="text-2xl md:text-3xl font-bold mb-2">What do you love? 💕</h2>
                 <p className="text-muted-foreground">
-                  Pick at least 3 things - the more you choose, the better we can personalize your experience!
+                  Pick your top 2 favorite things! We'll use these to create examples you'll actually enjoy.
                 </p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
@@ -261,14 +261,14 @@ const Personalization = () => {
                 <div className="text-center animate-slide-up">
                   <Badge 
                     className={`text-sm px-4 py-2 ${
-                      selectedInterests.length >= 3 
+                      selectedInterests.length >= 2 
                         ? "bg-success text-white" 
                         : "bg-muted"
                     }`}
                   >
-                    {selectedInterests.length >= 3 ? "🎉 Awesome! " : ""}
+                    {selectedInterests.length >= 2 ? "🎉 Perfect! " : ""}
                     {selectedInterests.length} selected
-                    {selectedInterests.length < 3 && ` - ${3 - selectedInterests.length} more to go!`}
+                    {selectedInterests.length < 2 && ` - ${2 - selectedInterests.length} more to go!`}
                   </Badge>
                 </div>
               )}

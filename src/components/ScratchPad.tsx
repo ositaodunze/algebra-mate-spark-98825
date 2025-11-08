@@ -13,6 +13,8 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
   const isDrawing = useRef(false);
 
   useEffect(() => {
+    if (!open) return; // Only set up when dialog is open
+    
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -22,8 +24,11 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
     // Set up canvas
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.strokeStyle = "#000";
+    
+    // Clear canvas when opened
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const startDrawing = (e: MouseEvent | TouchEvent) => {
       isDrawing.current = true;
@@ -46,6 +51,7 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
 
     const stopDrawing = () => {
       isDrawing.current = false;
+      ctx.closePath();
     };
 
     canvas.addEventListener("mousedown", startDrawing);

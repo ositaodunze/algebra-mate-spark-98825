@@ -216,9 +216,9 @@ const PreAssessment = () => {
       {/* Scratch Pad */}
       <ScratchPad open={showScratchPad} onOpenChange={setShowScratchPad} />
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background overflow-y-auto">
         {hasStarted && (
-          <>
+          <div className="pb-20">
             <div className="bg-gradient-hero py-12 md:py-16 text-white">
               <div className="container max-w-4xl mx-auto px-4 text-center">
                 <div className="inline-flex items-center gap-2 mb-4">
@@ -236,7 +236,7 @@ const PreAssessment = () => {
               </div>
             </div>
 
-            <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2">
+            <div className="fixed right-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
               <Button
                 variant="outline"
                 size="icon"
@@ -309,12 +309,14 @@ const PreAssessment = () => {
                 </Card>
               </div>
 
-              <AIAssistant 
-                sectionTitle="Pre-Assessment Help"
-                helpText="I'm here to help! If you're stuck on a question, remember to use the calculator and scratch pad tools on the left. Don't worry about getting everything right - this is just to help us understand your current level."
-              />
+              <div className="mt-8">
+                <AIAssistant 
+                  sectionTitle="Pre-Assessment Help"
+                  helpText="I'm here to help! If you're stuck on a question, remember to use the calculator and scratch pad tools on the right. Don't worry about getting everything right - this is just to help us understand your current level."
+                />
+              </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </>
