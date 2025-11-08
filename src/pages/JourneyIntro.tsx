@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,74 @@ const JourneyIntro = () => {
     // Award 50 points for completing the assessment
     setPoints(50);
   }, []);
+
+  // Get real-world application examples based on user interests
+  const getRealWorldExamples = () => {
+    const examples: { title: string; emoji: string; description: string }[] = [];
+    
+    if (interests.includes("gaming")) {
+      examples.push({
+        emoji: "🎮",
+        title: "Gaming",
+        description: "Calculate game scores, level progression, and damage formulas using expressions!"
+      });
+    }
+    if (interests.includes("sports")) {
+      examples.push({
+        emoji: "⚽",
+        title: "Sports",
+        description: "Track player stats, fantasy points, and performance metrics with algebra!"
+      });
+    }
+    if (interests.includes("music")) {
+      examples.push({
+        emoji: "🎵",
+        title: "Music",
+        description: "Calculate streaming royalties, ticket sales, and playlist analytics!"
+      });
+    }
+    if (interests.includes("technology")) {
+      examples.push({
+        emoji: "💻",
+        title: "Technology",
+        description: "Understand server costs, data storage, and algorithm efficiency!"
+      });
+    }
+    if (interests.includes("cooking")) {
+      examples.push({
+        emoji: "🍳",
+        title: "Cooking",
+        description: "Scale recipes, calculate nutritional values, and plan meal costs!"
+      });
+    }
+    if (interests.includes("fitness")) {
+      examples.push({
+        emoji: "💪",
+        title: "Fitness",
+        description: "Track calories burned, workout intensity, and progress goals!"
+      });
+    }
+
+    // Default examples if no interests or not enough
+    if (examples.length === 0) {
+      examples.push(
+        {
+          emoji: "💰",
+          title: "Money Management",
+          description: "Calculate earnings, budgets, and savings with algebraic expressions!"
+        },
+        {
+          emoji: "📱",
+          title: "Phone Plans",
+          description: "Compare costs and find the best deals using math!"
+        }
+      );
+    }
+
+    return examples.slice(0, 3); // Show max 3 examples
+  };
+
+  const realWorldExamples = getRealWorldExamples();
 
   // Beginner level progress (0-100 points for level 1)
   const progressPercentage = Math.min((points / 100) * 100, 100);
@@ -87,10 +155,10 @@ const JourneyIntro = () => {
           {/* Mascot explaining personalization */}
           <Mascot 
             emoji="🎯"
-            position="right"
+            position="center"
             variant="primary"
             message={
-              <div className="space-y-3">
+              <div className="space-y-3 text-center">
                 <p className="font-bold text-lg">Here's what makes YOUR path special!</p>
                 <p>
                   We noticed you're into <span className="font-semibold text-primary">
@@ -152,6 +220,27 @@ const JourneyIntro = () => {
                 </li>
               </ul>
             </div>
+
+            {/* Dynamic Real-World Examples */}
+            {realWorldExamples.length > 0 && (
+              <div className="bg-accent/10 rounded-xl p-4 border border-accent/20 mt-4">
+                <h3 className="font-bold text-base mb-3 flex items-center gap-2">
+                  <Target className="w-4 h-4 text-accent" />
+                  You'll See Examples About
+                </h3>
+                <div className="space-y-2">
+                  {realWorldExamples.map((example, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <span className="text-lg shrink-0">{example.emoji}</span>
+                      <div>
+                        <p className="text-sm font-semibold">{example.title}</p>
+                        <p className="text-xs text-muted-foreground">{example.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </Card>
 
           {/* Final encouragement */}

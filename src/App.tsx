@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Personalization from "./pages/Personalization";
 import PreAssessment from "./pages/PreAssessment";
 import JourneyIntro from "./pages/JourneyIntro";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Welcome />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/personalization" element={<Personalization />} />
           <Route path="/lesson" element={<Index />} />
           <Route path="/pre-assessment" element={<PreAssessment />} />

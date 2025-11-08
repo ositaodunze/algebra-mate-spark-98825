@@ -227,12 +227,9 @@ const PreAssessment = () => {
                     <span className="text-primary mt-0.5">✓</span>
                     <span>This helps us personalize your learning journey!</span>
                   </li>
-                </ul>
-              </div>
-              <p className="text-sm text-muted-foreground italic">
-                Take your time and do your best. Ready when you are!
-              </p>
-            </AlertDialogDescription>
+              </ul>
+            </div>
+          </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="flex-col sm:flex-row gap-3 mt-4">
             <Button 
@@ -334,6 +331,24 @@ const PreAssessment = () => {
           </div>
 
           {/* Tools */}
+          <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
+            <Button
+              onClick={() => setShowCalculator(!showCalculator)}
+              className="w-14 h-14 rounded-full shadow-glow"
+              size="icon"
+              variant="secondary"
+            >
+              🔢
+            </Button>
+            <Button
+              onClick={() => setShowScratchPad(!showScratchPad)}
+              className="w-14 h-14 rounded-full shadow-glow"
+              size="icon"
+              variant="secondary"
+            >
+              ✏️
+            </Button>
+          </div>
           <AIAssistant 
             sectionTitle="Pre-Assessment"
             helpText="Take your time with each question. This helps us understand what you know so we can create the perfect learning path for you!"

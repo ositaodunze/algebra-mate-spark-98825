@@ -6,6 +6,8 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import { DiscussionQuestions } from "@/components/DiscussionQuestions";
 import { AssessmentQuiz } from "@/components/AssessmentQuiz";
 import { AIAssistant } from "@/components/AIAssistant";
+import { Calculator } from "@/components/Calculator";
+import { ScratchPad } from "@/components/ScratchPad";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,6 +17,14 @@ import { VocabCard } from "@/components/VocabCard";
 const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
+  const [showCalculator, setShowCalculator] = useState(false);
+  const [showScratchPad, setShowScratchPad] = useState(false);
+  const [interests, setInterests] = useState<string[]>([]);
+
+  useEffect(() => {
+    const savedInterests = localStorage.getItem("userInterests");
+    setInterests(savedInterests ? JSON.parse(savedInterests) : []);
+  }, []);
 
   const steps = [
     { id: "intro", label: "Introduction" },
@@ -217,35 +227,103 @@ const Index = () => {
         subtitle="See algebra in action based on what interests you"
       >
         <div className="space-y-4">
-          <Card className="p-6 border-l-4 border-l-secondary hover:shadow-medium transition-shadow">
-            <h3 className="text-lg font-bold mb-2">🎮 Gaming</h3>
-            <p className="text-muted-foreground mb-3">
-              Game developers use expressions to calculate damage: If a sword does <span className="font-mono bg-muted px-2 py-1 rounded">10 + 3x</span> damage where x is your level, how much damage at level 5?
-            </p>
-            <p className="text-sm text-primary font-semibold">
-              Answer: 10 + 3(5) = 25 damage
-            </p>
-          </Card>
+          {interests.includes("gaming") && (
+            <Card className="p-6 border-l-4 border-l-secondary hover:shadow-medium transition-shadow">
+              <h3 className="text-lg font-bold mb-2">🎮 Gaming</h3>
+              <p className="text-muted-foreground mb-3">
+                Game developers use expressions to calculate damage: If a sword does <span className="font-mono bg-muted px-2 py-1 rounded">10 + 3x</span> damage where x is your level, how much damage at level 5?
+              </p>
+              <p className="text-sm text-primary font-semibold">
+                Answer: 10 + 3(5) = 25 damage
+              </p>
+            </Card>
+          )}
 
-          <Card className="p-6 border-l-4 border-l-accent hover:shadow-medium transition-shadow">
-            <h3 className="text-lg font-bold mb-2">💰 Money Management</h3>
-            <p className="text-muted-foreground mb-3">
-              You earn $15/hour. Your weekly earnings can be expressed as <span className="font-mono bg-muted px-2 py-1 rounded">15h</span> where h is hours worked.
-            </p>
-            <p className="text-sm text-primary font-semibold">
-              If you work 12 hours: 15(12) = $180
-            </p>
-          </Card>
+          {interests.includes("sports") && (
+            <Card className="p-6 border-l-4 border-l-accent hover:shadow-medium transition-shadow">
+              <h3 className="text-lg font-bold mb-2">⚽ Sports</h3>
+              <p className="text-muted-foreground mb-3">
+                Track your stats! If you score <span className="font-mono bg-muted px-2 py-1 rounded">2g + 3a</span> fantasy points where g = goals and a = assists, what's your score with 4 goals and 2 assists?
+              </p>
+              <p className="text-sm text-primary font-semibold">
+                Answer: 2(4) + 3(2) = 8 + 6 = 14 points
+              </p>
+            </Card>
+          )}
 
-          <Card className="p-6 border-l-4 border-l-primary hover:shadow-medium transition-shadow">
-            <h3 className="text-lg font-bold mb-2">📱 Phone Plans</h3>
-            <p className="text-muted-foreground mb-3">
-              Monthly cost: <span className="font-mono bg-muted px-2 py-1 rounded">30 + 0.10m</span> where m is extra minutes beyond your plan.
-            </p>
-            <p className="text-sm text-primary font-semibold">
-              With 100 extra minutes: 30 + 0.10(100) = $40
-            </p>
-          </Card>
+          {interests.includes("music") && (
+            <Card className="p-6 border-l-4 border-l-primary hover:shadow-medium transition-shadow">
+              <h3 className="text-lg font-bold mb-2">🎵 Music</h3>
+              <p className="text-muted-foreground mb-3">
+                Streaming royalties: If you earn <span className="font-mono bg-muted px-2 py-1 rounded">0.004s</span> dollars per stream, how much for 1,000 streams?
+              </p>
+              <p className="text-sm text-primary font-semibold">
+                Answer: 0.004(1000) = $4
+              </p>
+            </Card>
+          )}
+
+          {interests.includes("technology") && (
+            <Card className="p-6 border-l-4 border-l-secondary hover:shadow-medium transition-shadow">
+              <h3 className="text-lg font-bold mb-2">💻 Technology</h3>
+              <p className="text-muted-foreground mb-3">
+                Server costs: Cloud hosting is <span className="font-mono bg-muted px-2 py-1 rounded">50 + 0.15h</span> dollars where h is hours used. What's the cost for 200 hours?
+              </p>
+              <p className="text-sm text-primary font-semibold">
+                Answer: 50 + 0.15(200) = 50 + 30 = $80
+              </p>
+            </Card>
+          )}
+
+          {interests.includes("cooking") && (
+            <Card className="p-6 border-l-4 border-l-accent hover:shadow-medium transition-shadow">
+              <h3 className="text-lg font-bold mb-2">🍳 Cooking</h3>
+              <p className="text-muted-foreground mb-3">
+                Recipe scaling: If a recipe needs <span className="font-mono bg-muted px-2 py-1 rounded">2c + 3s</span> cups of ingredients where c = flour cups and s = sugar cups, how much total for 3 cups flour and 2 cups sugar?
+              </p>
+              <p className="text-sm text-primary font-semibold">
+                Answer: 2(3) + 3(2) = 6 + 6 = 12 cups total
+              </p>
+            </Card>
+          )}
+
+          {interests.includes("fitness") && (
+            <Card className="p-6 border-l-4 border-l-primary hover:shadow-medium transition-shadow">
+              <h3 className="text-lg font-bold mb-2">💪 Fitness</h3>
+              <p className="text-muted-foreground mb-3">
+                Calories burned: Running burns <span className="font-mono bg-muted px-2 py-1 rounded">100 + 10m</span> calories where m is minutes. How many for 30 minutes?
+              </p>
+              <p className="text-sm text-primary font-semibold">
+                Answer: 100 + 10(30) = 100 + 300 = 400 calories
+              </p>
+            </Card>
+          )}
+
+          {/* Default examples if no interests match or as fallback */}
+          {(!interests.length || 
+            !interests.some(i => ["gaming", "sports", "music", "technology", "cooking", "fitness"].includes(i))) && (
+            <>
+              <Card className="p-6 border-l-4 border-l-secondary hover:shadow-medium transition-shadow">
+                <h3 className="text-lg font-bold mb-2">💰 Money Management</h3>
+                <p className="text-muted-foreground mb-3">
+                  You earn $15/hour. Your weekly earnings can be expressed as <span className="font-mono bg-muted px-2 py-1 rounded">15h</span> where h is hours worked.
+                </p>
+                <p className="text-sm text-primary font-semibold">
+                  If you work 12 hours: 15(12) = $180
+                </p>
+              </Card>
+
+              <Card className="p-6 border-l-4 border-l-primary hover:shadow-medium transition-shadow">
+                <h3 className="text-lg font-bold mb-2">📱 Phone Plans</h3>
+                <p className="text-muted-foreground mb-3">
+                  Monthly cost: <span className="font-mono bg-muted px-2 py-1 rounded">30 + 0.10m</span> where m is extra minutes beyond your plan.
+                </p>
+                <p className="text-sm text-primary font-semibold">
+                  With 100 extra minutes: 30 + 0.10(100) = $40
+                </p>
+              </Card>
+            </>
+          )}
         </div>
       </LearningSection>
 
@@ -500,6 +578,32 @@ const Index = () => {
           <p>Great work on completing this lesson! 🎉</p>
         </div>
       </div>
+
+      {/* Calculator & Scratch Pad */}
+      <Calculator open={showCalculator} onOpenChange={setShowCalculator} />
+      <ScratchPad open={showScratchPad} onOpenChange={setShowScratchPad} />
+
+      {/* Tool Buttons - Show only in problem-solving sections */}
+      {(currentStep >= 4) && (
+        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
+          <Button
+            onClick={() => setShowCalculator(!showCalculator)}
+            className="w-14 h-14 rounded-full shadow-glow"
+            size="icon"
+            variant="secondary"
+          >
+            🔢
+          </Button>
+          <Button
+            onClick={() => setShowScratchPad(!showScratchPad)}
+            className="w-14 h-14 rounded-full shadow-glow"
+            size="icon"
+            variant="secondary"
+          >
+            ✏️
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
