@@ -62,24 +62,24 @@ const JourneyIntro = () => {
             }
           />
           {/* Points Display Card */}
-          <Card className="p-6 shadow-medium border-2 border-accent/30">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="text-center md:text-left">
-                <h2 className="text-2xl font-bold mb-2 flex items-center gap-2 justify-center md:justify-start">
-                  <Zap className="w-6 h-6 text-accent" />
-                  Points Earned!
-                </h2>
-                <p className="text-base text-muted-foreground">
-                  You're officially on the path to math mastery! 🚀
-                </p>
-              </div>
-              <div className="text-center bg-accent/5 rounded-2xl p-6 shadow-sm border border-accent/20">
-                <div className="flex items-center gap-2 justify-center mb-2">
+          <Card className="p-6 shadow-medium">
+            <div className="flex items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
                   <Star className="w-8 h-8 text-accent fill-accent" />
-                  <p className="text-5xl font-bold text-primary">{points}</p>
                 </div>
-                <p className="text-xs font-bold text-accent uppercase tracking-wider">Points</p>
-                <Badge className="mt-2 bg-success text-xs">Beginner Level</Badge>
+                <div>
+                  <h2 className="text-xl font-bold mb-1 flex items-center gap-2">
+                    Points Earned!
+                  </h2>
+                  <p className="text-sm text-muted-foreground">
+                    You're officially on the path to math mastery! 🚀
+                  </p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-3xl font-bold text-primary">{points}</p>
+                <Badge className="mt-1 bg-success text-xs">Beginner Level</Badge>
               </div>
             </div>
           </Card>
@@ -103,51 +103,51 @@ const JourneyIntro = () => {
           />
 
           {/* First Lesson Card */}
-          <Card className="p-6 md:p-8 shadow-medium border-2 border-primary/30">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shrink-0 shadow-medium">
-                <Target className="w-7 h-7 text-white" />
+          <Card className="p-6 shadow-medium">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shrink-0">
+                <Target className="w-6 h-6 text-white" />
               </div>
               <div>
-                <Badge className="bg-primary mb-3 text-sm px-4 py-1">📚 Lesson 1</Badge>
-                <h2 className="text-3xl font-bold mb-2">Expressions & Variables</h2>
-                <p className="text-muted-foreground">
+                <Badge className="bg-primary mb-2 text-xs px-3 py-1">📚 Lesson 1</Badge>
+                <h2 className="text-2xl font-bold mb-1">Expressions & Variables</h2>
+                <p className="text-sm text-muted-foreground">
                   Everyone starts here - it's the foundation everything else builds on! Don't worry, we'll make it fun! 🎮
                 </p>
               </div>
             </div>
 
-            <div className="bg-background/90 backdrop-blur-sm rounded-2xl p-6 border-2 border-border">
-              <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary" />
+            <div className="bg-background/50 rounded-xl p-4 border border-border">
+              <h3 className="font-bold text-base mb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-primary" />
                 What You'll Learn
               </h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-success text-sm font-bold">✓</span>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-2">
+                  <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-success text-xs font-bold">✓</span>
                   </div>
                   <div>
-                    <p className="font-semibold">What variables actually are</p>
-                    <p className="text-sm text-muted-foreground">Spoiler: They're way easier than you think!</p>
+                    <p className="text-sm font-semibold">What variables actually are</p>
+                    <p className="text-xs text-muted-foreground">Spoiler: They're way easier than you think!</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-success text-sm font-bold">✓</span>
+                <li className="flex items-start gap-2">
+                  <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-success text-xs font-bold">✓</span>
                   </div>
                   <div>
-                    <p className="font-semibold">Create and simplify expressions</p>
-                    <p className="text-sm text-muted-foreground">With examples from YOUR interests</p>
+                    <p className="text-sm font-semibold">Create and simplify expressions</p>
+                    <p className="text-xs text-muted-foreground">With examples from YOUR interests</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-success text-sm font-bold">✓</span>
+                <li className="flex items-start gap-2">
+                  <div className="w-5 h-5 rounded-full bg-success/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-success text-xs font-bold">✓</span>
                   </div>
                   <div>
-                    <p className="font-semibold">Use them in real scenarios</p>
-                    <p className="text-sm text-muted-foreground">See how math connects to your world</p>
+                    <p className="text-sm font-semibold">Use them in real scenarios</p>
+                    <p className="text-xs text-muted-foreground">See how math connects to your world</p>
                   </div>
                 </li>
               </ul>
