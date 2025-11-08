@@ -13,14 +13,18 @@ export const BottomChat = () => {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    setMessages(prev => [...prev, { role: "user", content: input }]);
+    setMessages((prev) => [...prev, { role: "user", content: input }]);
     setIsLoading(true);
-    
+
     setTimeout(() => {
-      setMessages(prev => [...prev, {
-        role: "assistant",
-        content: "This is a placeholder response. Once we connect to the AI API, I'll provide helpful, personalized guidance on your question!"
-      }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content:
+            "This is a placeholder response. Once we connect to the AI API, I'll provide helpful, personalized guidance on your question!",
+        },
+      ]);
       setIsLoading(false);
     }, 1000);
 
@@ -35,7 +39,7 @@ export const BottomChat = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-2">
+    <div className="fixed bottom-0 left-0 right-0 z-0 px-[8rem] pb-[8rem]">
       {/* Expanded Chat */}
       {isExpanded && (
         <Card className="mx-auto max-w-md shadow-2xl border-2 rounded-2xl overflow-hidden">
@@ -60,15 +64,10 @@ export const BottomChat = () => {
               </div>
             ) : (
               messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                >
+                <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                   <Card
                     className={`max-w-[80%] p-3 ${
-                      message.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
+                      message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
                     }`}
                   >
                     {message.role === "assistant" && (
@@ -105,11 +104,7 @@ export const BottomChat = () => {
                 disabled={isLoading}
                 className="text-sm"
               />
-              <Button 
-                onClick={handleSend} 
-                size="sm"
-                disabled={!input.trim() || isLoading}
-              >
+              <Button onClick={handleSend} size="sm" disabled={!input.trim() || isLoading}>
                 <Send className="w-3 h-3" />
               </Button>
             </div>
@@ -122,11 +117,7 @@ export const BottomChat = () => {
         <div className="bg-background border-t shadow-lg rounded-t-2xl">
           <div className="container max-w-lg mx-auto px-3 py-2">
             <div className="flex gap-2 items-center">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsExpanded(true)}
-              >
+              <Button variant="ghost" size="icon" onClick={() => setIsExpanded(true)}>
                 <MessageCircle className="w-5 h-5" />
               </Button>
               <Input
