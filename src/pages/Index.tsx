@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Lightbulb, Target, Gamepad2 } from "lucide-react";
 import { VocabCard } from "@/components/VocabCard";
+import heroImage from "@/assets/expressions-hero.png";
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -134,17 +135,26 @@ const Index = () => {
       />
 
       {/* Hero Section */}
-      <div className="bg-gradient-hero py-16 md:py-24 text-white">
-        <div className="container max-w-5xl mx-auto px-4 text-center">
-          <Badge className="mb-4 bg-white/20 text-white border-white/30">
-            Algebra 1 • Lesson 1
-          </Badge>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Expressions & Variables
-          </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-            Master the building blocks of algebra through personalized, interactive learning
-          </p>
+      <div className="relative py-8 md:py-12">
+        <div className="container max-w-5xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/30">
+              Algebra 1 • Lesson 1
+            </Badge>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
+              Expressions & Variables
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+              Master the building blocks of algebra through personalized, interactive learning
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden shadow-glow max-w-4xl mx-auto">
+            <img 
+              src={heroImage} 
+              alt="Algebraic expressions and variables illustration" 
+              className="w-full h-auto"
+            />
+          </div>
         </div>
       </div>
 

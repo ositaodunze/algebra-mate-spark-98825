@@ -38,8 +38,8 @@ export const BottomChat = () => {
     <div className="fixed bottom-0 left-0 right-0 z-50">
       {/* Expanded Chat */}
       {isExpanded && (
-        <Card className="mx-auto max-w-3xl mb-4 mx-4 shadow-2xl border-2">
-          <div className="flex items-center justify-between p-3 border-b bg-primary/5">
+        <Card className="mx-auto max-w-2xl mb-3 mx-4 shadow-2xl border-2">
+          <div className="flex items-center justify-between p-2 border-b bg-primary/5">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-primary" />
               <h3 className="font-semibold text-sm">AI Math Tutor</h3>
@@ -50,7 +50,7 @@ export const BottomChat = () => {
           </div>
 
           {/* Messages */}
-          <div className="h-48 overflow-y-auto p-3 space-y-2">
+          <div className="h-32 overflow-y-auto p-2 space-y-2">
             {messages.length === 0 ? (
               <div className="flex items-center justify-center h-full text-muted-foreground text-center">
                 <div>
@@ -95,7 +95,7 @@ export const BottomChat = () => {
           </div>
 
           {/* Input */}
-          <div className="p-3 border-t bg-background">
+          <div className="p-2 border-t bg-background">
             <div className="flex gap-2">
               <Input
                 value={input}
@@ -120,7 +120,7 @@ export const BottomChat = () => {
       {/* Collapsed Input Bar */}
       {!isExpanded && (
         <div className="bg-background border-t shadow-lg">
-          <div className="container max-w-4xl mx-auto px-4 py-3">
+          <div className="container max-w-4xl mx-auto px-4 py-2">
             <div className="flex gap-2 items-center">
               <Button
                 variant="ghost"
