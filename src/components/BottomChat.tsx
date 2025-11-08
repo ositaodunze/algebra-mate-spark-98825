@@ -38,7 +38,7 @@ export const BottomChat = () => {
     <div className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-2">
       {/* Expanded Chat */}
       {isExpanded && (
-        <Card className="mx-auto max-w-xl shadow-2xl border-2 rounded-2xl overflow-hidden">
+        <Card className="mx-auto max-w-md shadow-2xl border-2 rounded-2xl overflow-hidden">
           <div className="flex items-center justify-between p-2 border-b bg-primary/5">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-primary" />
@@ -120,7 +120,7 @@ export const BottomChat = () => {
       {/* Collapsed Input Bar */}
       {!isExpanded && (
         <div className="bg-background border-t shadow-lg rounded-t-2xl">
-          <div className="container max-w-3xl mx-auto px-3 py-2">
+          <div className="container max-w-lg mx-auto px-3 py-2">
             <div className="flex gap-2 items-center">
               <Button
                 variant="ghost"
