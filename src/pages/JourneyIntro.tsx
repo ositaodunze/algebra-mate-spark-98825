@@ -292,16 +292,17 @@ const JourneyIntro = () => {
                         <Lock className="w-4 h-4 text-muted-foreground" />
                       </div>
                     )}
-                    <div className="text-4xl mb-2">{lesson.icon}</div>
-                    <div className="text-xs font-bold mb-1">LEVEL {lesson.level}</div>
-                    <div className="text-xs font-semibold">{lesson.title}</div>
-                    {lesson.level === 1 && (
+                    {lesson.level === 1 ? (
                       <img 
                         src={expressionsGradient} 
                         alt="Expressions" 
-                        className="mt-3 w-full rounded-lg"
+                        className="w-16 h-16 mx-auto mb-2 object-contain"
                       />
+                    ) : (
+                      <div className="text-4xl mb-2">{lesson.icon}</div>
                     )}
+                    <div className="text-xs font-bold mb-1">LEVEL {lesson.level}</div>
+                    <div className="text-xs font-semibold">{lesson.title}</div>
                   </div>
                 ))}
               </div>
