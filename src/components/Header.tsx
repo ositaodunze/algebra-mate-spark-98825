@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
+import { Home } from "lucide-react";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -15,7 +16,15 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
       <div className="container max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-foreground">Math4You</h1>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate('/journey-intro')}
+          className="gap-2"
+        >
+          <Home className="w-5 h-5" />
+          Home
+        </Button>
         <Button
           variant="outline"
           size="sm"
