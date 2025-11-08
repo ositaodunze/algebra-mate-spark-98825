@@ -6,8 +6,6 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import { DiscussionQuestions } from "@/components/DiscussionQuestions";
 import { AssessmentQuiz } from "@/components/AssessmentQuiz";
 import { AIAssistant } from "@/components/AIAssistant";
-import { Calculator } from "@/components/Calculator";
-import { ScratchPad } from "@/components/ScratchPad";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,8 +15,6 @@ import { VocabCard } from "@/components/VocabCard";
 const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
-  const [showCalculator, setShowCalculator] = useState(false);
-  const [showScratchPad, setShowScratchPad] = useState(false);
   const [interests, setInterests] = useState<string[]>([]);
 
   useEffect(() => {
@@ -374,11 +370,11 @@ const Index = () => {
         />
       </LearningSection>
 
-      {/* I Do, We Do, You Do Section */}
+      {/* Guided Practice with AI Chat */}
       <LearningSection
         id="discussion"
-        title="Guided Practice: I Do, We Do, You Do"
-        subtitle="Learn step-by-step with AI guidance"
+        title="Guided Practice"
+        subtitle="Ask questions and get help from your AI tutor"
       >
         {isSectionLocked(4) ? (
           <Card className="p-12 text-center bg-muted/50">
@@ -578,32 +574,6 @@ const Index = () => {
           <p>Great work on completing this lesson! 🎉</p>
         </div>
       </div>
-
-      {/* Calculator & Scratch Pad */}
-      <Calculator open={showCalculator} onOpenChange={setShowCalculator} />
-      <ScratchPad open={showScratchPad} onOpenChange={setShowScratchPad} />
-
-      {/* Tool Buttons - Show only in problem-solving sections */}
-      {(currentStep >= 4) && (
-        <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-40">
-          <Button
-            onClick={() => setShowCalculator(!showCalculator)}
-            className="w-14 h-14 rounded-full shadow-glow"
-            size="icon"
-            variant="secondary"
-          >
-            🔢
-          </Button>
-          <Button
-            onClick={() => setShowScratchPad(!showScratchPad)}
-            className="w-14 h-14 rounded-full shadow-glow"
-            size="icon"
-            variant="secondary"
-          >
-            ✏️
-          </Button>
-        </div>
-      )}
     </div>
   );
 };

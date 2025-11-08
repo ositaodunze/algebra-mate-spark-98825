@@ -1,14 +1,9 @@
 import { useRef, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Eraser } from "lucide-react";
 
-interface ScratchPadProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
+export const EmbeddedScratchPad = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
 
@@ -77,24 +72,20 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
-            Scratch Pad
-            <Button variant="outline" size="sm" onClick={clearCanvas}>
-              <Eraser className="w-4 h-4 mr-2" />
-              Clear
-            </Button>
-          </DialogTitle>
-        </DialogHeader>
-        <canvas
-          ref={canvasRef}
-          width={600}
-          height={400}
-          className="border border-border rounded-lg bg-white touch-none"
-        />
-      </DialogContent>
-    </Dialog>
+    <Card className="p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold">Scratch Pad</h3>
+        <Button variant="outline" size="sm" onClick={clearCanvas}>
+          <Eraser className="w-3 h-3 mr-1" />
+          Clear
+        </Button>
+      </div>
+      <canvas
+        ref={canvasRef}
+        width={400}
+        height={300}
+        className="border border-border rounded-lg bg-white touch-none w-full"
+      />
+    </Card>
   );
 };

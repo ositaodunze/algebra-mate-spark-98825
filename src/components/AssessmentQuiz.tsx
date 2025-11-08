@@ -12,6 +12,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { EmbeddedCalculator } from "@/components/EmbeddedCalculator";
+import { EmbeddedScratchPad } from "@/components/EmbeddedScratchPad";
 
 interface QuizQuestion {
   id: string;
@@ -112,7 +114,9 @@ export const AssessmentQuiz = ({ questions, onComplete }: AssessmentQuizProps) =
   const question = questions[currentQuestion];
 
   return (
-    <div className="space-y-4">
+    <div className="grid lg:grid-cols-3 gap-6">
+      {/* Main Quiz Area */}
+      <div className="lg:col-span-2 space-y-4">
       {/* Score and Timer Header */}
       <div className="flex justify-between items-center">
         <Card className="px-6 py-3 flex items-center gap-3 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
@@ -265,6 +269,13 @@ export const AssessmentQuiz = ({ questions, onComplete }: AssessmentQuizProps) =
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      </div>
+      
+      {/* Tools Panel */}
+      <div className="space-y-4">
+        <EmbeddedCalculator />
+        <EmbeddedScratchPad />
+      </div>
     </div>
   );
 };
