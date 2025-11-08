@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
+import { FloatingChat } from "@/components/FloatingChat";
 import { LearningSection } from "@/components/LearningSection";
 import { ProgressStepper } from "@/components/ProgressStepper";
 import { VideoPlayer } from "@/components/VideoPlayer";
@@ -574,6 +575,8 @@ const Index = () => {
           <p>Great work on completing this lesson! 🎉</p>
         </div>
       </div>
+
+      <FloatingChat />
     </div>
   );
 };

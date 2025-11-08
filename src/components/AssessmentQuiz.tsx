@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, XCircle, Award, AlertCircle, Timer, Trophy, Zap } from "lucide-react";
+import { CheckCircle2, XCircle, Award, AlertCircle, Timer, Trophy, Zap, Calculator as CalculatorIcon, Pencil } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import {
   AlertDialog,
@@ -12,8 +12,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { EmbeddedCalculator } from "@/components/EmbeddedCalculator";
-import { EmbeddedScratchPad } from "@/components/EmbeddedScratchPad";
+import { Calculator } from "@/components/Calculator";
+import { ScratchPad } from "@/components/ScratchPad";
 
 interface QuizQuestion {
   id: string;
@@ -37,6 +37,8 @@ export const AssessmentQuiz = ({ questions, onComplete }: AssessmentQuizProps) =
   const [timeLeft, setTimeLeft] = useState(30);
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [calculatorOpen, setCalculatorOpen] = useState(false);
+  const [scratchPadOpen, setScratchPadOpen] = useState(false);
 
   useEffect(() => {
     if (!completed && !showResult && timeLeft > 0) {
@@ -269,13 +271,30 @@ export const AssessmentQuiz = ({ questions, onComplete }: AssessmentQuizProps) =
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Tools Buttons */}
+      <div className="flex gap-3 justify-center">
+        <Button
+          variant="outline"
+          onClick={() => setCalculatorOpen(true)}
+          className="gap-2"
+        >
+          <CalculatorIcon className="w-4 h-4" />
+          Calculator
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => setScratchPadOpen(true)}
+          className="gap-2"
+        >
+          <Pencil className="w-4 h-4" />
+          Scratch Pad
+        </Button>
       </div>
-      
-      {/* Tools Panel */}
-      <div className="space-y-4">
-        <EmbeddedCalculator />
-        <EmbeddedScratchPad />
       </div>
+
+      <Calculator open={calculatorOpen} onOpenChange={setCalculatorOpen} />
+      <ScratchPad open={scratchPadOpen} onOpenChange={setScratchPadOpen} />
     </div>
   );
 };
