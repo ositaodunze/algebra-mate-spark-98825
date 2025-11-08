@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Calculator as CalculatorIcon, Pencil, MessageCircle } from "lucide-react";
 import { Calculator } from "@/components/Calculator";
 import { ScratchPad } from "@/components/ScratchPad";
+import { InlineChat } from "@/components/InlineChat";
 
 interface DiscussionQuestionsProps {
   onComplete?: () => void;
@@ -23,12 +24,12 @@ export const DiscussionQuestions = ({ onComplete }: DiscussionQuestionsProps) =>
           <div>
             <h3 className="text-xl font-semibold mb-2">Discussion & Questions</h3>
             <p className="text-muted-foreground">
-              Have questions? Use the chat bubble at the bottom right to ask our AI assistant anything about algebraic expressions!
+              Have questions? Use the chat below to ask our AI assistant anything about algebraic expressions!
             </p>
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 mb-6">
           <Button
             variant="outline"
             onClick={() => setCalculatorOpen(true)}
@@ -46,6 +47,8 @@ export const DiscussionQuestions = ({ onComplete }: DiscussionQuestionsProps) =>
             Scratch Pad
           </Button>
         </div>
+
+        <InlineChat />
       </Card>
 
       <div className="text-center">

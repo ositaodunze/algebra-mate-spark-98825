@@ -14,10 +14,15 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !open) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    // Set canvas size properly
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
     // Set up canvas
     ctx.lineCap = "round";
@@ -66,7 +71,7 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
       canvas.removeEventListener("touchmove", draw);
       canvas.removeEventListener("touchend", stopDrawing);
     };
-  }, []);
+  }, [open]);
 
   const clearCanvas = () => {
     const canvas = canvasRef.current;

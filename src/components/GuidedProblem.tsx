@@ -2,13 +2,20 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Lightbulb, MessageSquare, CheckCircle2, ArrowRight } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface Step {
   question: string;
   hint?: string;
   correctApproach: string;
+  type?: "open" | "multiple-choice" | "fill-blank";
+  options?: string[];
+  correctAnswer?: number | string;
+  blankLabel?: string;
 }
 
 interface GuidedProblemProps {
@@ -36,6 +43,7 @@ export const GuidedProblem = ({
 
   const currentStepData = steps[currentStep];
   const isLastStep = currentStep === steps.length - 1;
+  const questionType = currentStepData.type || "open";
 
   const handleNext = () => {
     if (isLastStep) {
@@ -45,6 +53,46 @@ export const GuidedProblem = ({
       setUserAnswer("");
       setShowHint(false);
       setHasQuestions(null);
+    }
+  };
+
+  const renderAnswerInput = () => {
+    if (questionType === "multiple-choice" && currentStepData.options) {
+      return (
+        <RadioGroup value={userAnswer} onValueChange={setUserAnswer}>
+          <div className="space-y-3">
+            {currentStepData.options.map((option, index) => (
+              <div key={index} className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-accent/50 cursor-pointer">
+                <RadioGroupItem value={String(index)} id={`option-${index}`} />
+                <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
+                  {option}
+                </Label>
+              </div>
+            ))}
+          </div>
+        </RadioGroup>
+      );
+    } else if (questionType === "fill-blank") {
+      return (
+        <div className="space-y-2">
+          <Label>{currentStepData.blankLabel || "Your answer:"}</Label>
+          <Input
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            placeholder="Type your answer..."
+            className="text-lg font-medium"
+          />
+        </div>
+      );
+    } else {
+      return (
+        <Textarea
+          value={userAnswer}
+          onChange={(e) => setUserAnswer(e.target.value)}
+          placeholder="Type your answer here..."
+          className="min-h-20"
+        />
+      );
     }
   };
 
@@ -146,12 +194,9 @@ export const GuidedProblem = ({
           <div className="space-y-4 ml-16">
             <div className="bg-secondary/5 border border-secondary/20 rounded-lg p-4">
               <p className="font-semibold mb-3">Step {currentStep + 1}: {currentStepData.question}</p>
-              <Textarea
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                placeholder="Type your answer here..."
-                className="min-h-20 mb-3"
-              />
+              <div className="mb-3">
+                {renderAnswerInput()}
+              </div>
               {showHint && currentStepData.hint && (
                 <p className="text-sm text-muted-foreground italic mb-2">
                   💡 Hint: {currentStepData.hint}
@@ -211,12 +256,9 @@ export const GuidedProblem = ({
         <div className="space-y-4 ml-16">
           <div className="bg-accent/5 border border-accent/20 rounded-lg p-4">
             <p className="font-semibold mb-3">Step {currentStep + 1}: {currentStepData.question}</p>
-            <Textarea
-              value={userAnswer}
-              onChange={(e) => setUserAnswer(e.target.value)}
-              placeholder="Show your work here..."
-              className="min-h-20 mb-3"
-            />
+            <div className="mb-3">
+              {renderAnswerInput()}
+            </div>
             {showHint && currentStepData.hint && (
               <div className="bg-primary/10 border border-primary/20 rounded p-3 mb-3">
                 <p className="text-sm font-medium mb-1">AI Tutor Feedback:</p>

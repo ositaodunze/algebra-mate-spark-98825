@@ -14,6 +14,11 @@ export const EmbeddedScratchPad = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Set canvas size properly
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
     // Set up canvas
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
