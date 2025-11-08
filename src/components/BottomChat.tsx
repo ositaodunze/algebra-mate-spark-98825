@@ -39,7 +39,7 @@ export const BottomChat = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-2">
+    <div className="fixed bottom-0 left-0 right-0 z-25 px-[8rem] pb-2">
       {/* Expanded Chat */}
       {isExpanded && (
         <Card className="mx-auto max-w-md shadow-2xl border-2 rounded-2xl overflow-hidden">
