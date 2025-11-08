@@ -40,34 +40,20 @@ const JourneyIntro = () => {
 
       <div className="container max-w-4xl mx-auto px-4 py-12">
         <div className="space-y-8">
-          {/* Points and Progress */}
-          <Card className="p-8 shadow-medium bg-gradient-to-br from-primary/5 to-secondary/5">
-            <div className="flex items-center justify-between mb-6">
+          {/* Points Earned */}
+          <Card className="p-8 shadow-glow bg-gradient-to-br from-primary/10 to-secondary/10 border-2 border-primary/20">
+            <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold mb-2">Assessment Complete!</h2>
-                <p className="text-muted-foreground">You've earned points for completing the pre-assessment</p>
+                <h2 className="text-3xl font-bold mb-2">🎉 Assessment Complete!</h2>
+                <p className="text-lg text-muted-foreground">Great job! You've earned your first points</p>
               </div>
-              <div className="text-right">
-                <div className="flex items-center gap-2 justify-end mb-1">
-                  <Star className="w-6 h-6 text-primary fill-primary" />
-                  <p className="text-4xl font-bold text-primary">{points}</p>
+              <div className="text-center bg-background/80 rounded-2xl p-6 shadow-medium">
+                <div className="flex items-center gap-3 justify-center mb-2">
+                  <Star className="w-8 h-8 text-accent fill-accent animate-pulse" />
+                  <p className="text-5xl font-bold text-primary">{points}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">Points Earned</p>
+                <p className="text-sm font-semibold text-muted-foreground">Points Earned</p>
               </div>
-            </div>
-            
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-secondary" />
-                  <span className="font-semibold">Level 1: Beginner</span>
-                </div>
-                <span className="text-muted-foreground">{points}/100 Points</span>
-              </div>
-              <Progress value={progressPercentage} className="h-3" />
-              <p className="text-xs text-muted-foreground">
-                Keep learning to reach Level 2! Earn points by completing lessons and activities.
-              </p>
             </div>
           </Card>
 

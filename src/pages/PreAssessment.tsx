@@ -156,7 +156,7 @@ const PreAssessment = () => {
             </div>
             <AlertDialogDescription className="text-base space-y-4 text-center">
               <p className="text-lg">
-                You're about to start the <strong>Math4U Pre-Assessment</strong>.
+                You're about to start the <strong>Math4You Pre-Assessment</strong>.
               </p>
               <div className="bg-muted/50 rounded-lg p-6 space-y-3 text-left">
                 <p className="font-semibold text-foreground">What to expect:</p>

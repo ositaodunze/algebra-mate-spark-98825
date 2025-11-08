@@ -17,7 +17,7 @@ const Welcome = () => {
           {/* Main Heading */}
           <div className="space-y-4">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-              Welcome to Math4U
+              Welcome to Math4You
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
               Your personalized journey to mastering mathematics

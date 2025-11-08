@@ -8,55 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 205 100% 97%;
+    --foreground: 230 35% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 230 35% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 230 35% 15%;
 
-    --primary: 182 75% 45%;
+    --primary: 195 85% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 182 75% 65%;
+    --primary-glow: 195 85% 75%;
 
-    --secondary: 15 85% 62%;
+    --secondary: 285 80% 65%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 30% 94%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 205 40% 92%;
+    --muted-foreground: 215 15% 50%;
 
-    --accent: 270 60% 65%;
+    --accent: 35 95% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 142 71% 45%;
+    --success: 145 80% 50%;
     --success-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 88%;
-    --input: 214 32% 91%;
-    --ring: 182 75% 45%;
+    --border: 205 30% 88%;
+    --input: 205 30% 92%;
+    --ring: 195 85% 55%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     /* Learning style colors */
     --visual: 265 85% 65%;
-    --verbal: 142 71% 50%;
+    --verbal: 145 80% 50%;
     --logical: 220 90% 60%;
-    --kinesthetic: 25 95% 55%;
+    --kinesthetic: 35 95% 60%;
 
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(182 75% 45%), hsl(182 75% 65%));
-    --gradient-secondary: linear-gradient(135deg, hsl(15 85% 62%), hsl(25 90% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(182 75% 45%) 0%, hsl(270 60% 65%) 100%);
+    /* Custom gradients - Playful and fun for middle schoolers */
+    --gradient-primary: linear-gradient(135deg, hsl(195 85% 55%), hsl(285 80% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(35 95% 60%), hsl(15 90% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(195 85% 55%) 0%, hsl(285 80% 65%) 50%, hsl(35 95% 60%) 100%);
 
-    /* Shadows */
-    --shadow-soft: 0 2px 8px hsl(222 47% 11% / 0.08);
-    --shadow-medium: 0 4px 16px hsl(222 47% 11% / 0.12);
-    --shadow-glow: 0 8px 32px hsl(182 75% 45% / 0.3);
+    /* Shadows - Softer and more playful */
+    --shadow-soft: 0 2px 12px hsl(195 85% 55% / 0.15);
+    --shadow-medium: 0 4px 20px hsl(195 85% 55% / 0.25);
+    --shadow-glow: 0 8px 40px hsl(195 85% 55% / 0.4);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
