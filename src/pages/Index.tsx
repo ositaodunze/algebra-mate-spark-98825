@@ -9,13 +9,7 @@ import { AIAssistant } from "@/components/AIAssistant";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Lightbulb, Target } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { VocabCard } from "@/components/VocabCard";
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -183,31 +177,16 @@ const Index = () => {
         subtitle="Essential terms you'll use throughout this lesson"
         variant="highlight"
       >
-        <Carousel className="w-full max-w-2xl mx-auto">
-          <CarouselContent>
-            {vocabularyTerms.map((vocab, index) => (
-              <CarouselItem key={index}>
-                <Card className="p-6 hover:shadow-medium transition-all duration-300 border-l-4 border-l-primary">
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <h3 className="text-lg font-bold text-foreground">{vocab.term}</h3>
-                    <Badge variant="secondary" className="shrink-0">New</Badge>
-                  </div>
-                  <p className="text-muted-foreground mb-2">{vocab.definition}</p>
-                  {vocab.example && (
-                    <div className="mt-3 pt-3 border-t border-border">
-                      <p className="text-sm text-foreground">
-                        <span className="font-semibold text-primary">Example: </span>
-                        {vocab.example}
-                      </p>
-                    </div>
-                  )}
-                </Card>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {vocabularyTerms.map((vocab, index) => (
+            <VocabCard
+              key={index}
+              term={vocab.term}
+              definition={vocab.definition}
+              example={vocab.example}
+            />
+          ))}
+        </div>
         <AIAssistant
           sectionTitle="Understanding Vocabulary"
           helpText="These terms are the building blocks of algebra! Take your time with each one. Try to connect them to things you already know. If something is confusing, just ask me!"
