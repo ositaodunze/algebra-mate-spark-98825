@@ -199,9 +199,6 @@ const PreAssessment = () => {
         <AlertDialogContent className="max-w-2xl">
           <AlertDialogHeader className="space-y-6">
             <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
-                <Brain className="w-10 h-10 text-primary" />
-              </div>
               <AlertDialogTitle className="text-3xl font-bold">Ready to Begin?</AlertDialogTitle>
             </div>
             <AlertDialogDescription className="text-base space-y-4 text-center">

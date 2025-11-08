@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { Flame, Shield, Trophy, Target, Lock, BookOpen, Brain, Zap, Award, TrendingUp } from "lucide-react";
 import { Header } from "@/components/Header";
 import expressionsImage from "@/assets/journey-expressions.png";
+import expressionsGradient from "@/assets/expressions-gradient.png";
 
 const JourneyIntro = () => {
   const navigate = useNavigate();
@@ -294,6 +295,13 @@ const JourneyIntro = () => {
                     <div className="text-4xl mb-2">{lesson.icon}</div>
                     <div className="text-xs font-bold mb-1">LEVEL {lesson.level}</div>
                     <div className="text-xs font-semibold">{lesson.title}</div>
+                    {lesson.level === 1 && (
+                      <img 
+                        src={expressionsGradient} 
+                        alt="Expressions" 
+                        className="mt-3 w-full rounded-lg"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
