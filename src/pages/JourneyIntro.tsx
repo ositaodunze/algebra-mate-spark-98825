@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Flame, Shield, Trophy, Target, Lock, BookOpen, Brain, Zap, Award, TrendingUp } from "lucide-react";
+import { Header } from "@/components/Header";
 
 const JourneyIntro = () => {
   const navigate = useNavigate();
@@ -100,15 +101,17 @@ const JourneyIntro = () => {
   // Lessons roadmap
   const lessons = [
     { id: 1, title: "Expressions & Variables", icon: "📊", level: 1, locked: false, current: true },
-    { id: 2, title: "Solving Equations", icon: "⚖️", level: 1, locked: true },
-    { id: 3, title: "Linear Functions", icon: "📈", level: 2, locked: true },
-    { id: 4, title: "Systems of Equations", icon: "🔢", level: 2, locked: true },
-    { id: 5, title: "Quadratic Functions", icon: "🎯", level: 3, locked: true },
+    { id: 2, title: "Solving Equations", icon: "⚖️", level: 2, locked: true },
+    { id: 3, title: "Linear Functions", icon: "📈", level: 3, locked: true },
+    { id: 4, title: "Systems of Equations", icon: "🔢", level: 4, locked: true },
+    { id: 5, title: "Quadratic Functions", icon: "🎯", level: 5, locked: true },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+      <Header />
+      
+      {/* Welcome Section */}
       <div className="border-b border-border bg-card">
         <div className="container max-w-7xl mx-auto px-4 py-6">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground">
