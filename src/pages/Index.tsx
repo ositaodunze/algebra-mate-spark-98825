@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { LearningSection } from "@/components/LearningSection";
 import { ProgressStepper } from "@/components/ProgressStepper";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { LearningStyleTabs } from "@/components/LearningStyleTabs";
 import { DiscussionQuestions } from "@/components/DiscussionQuestions";
 import { AssessmentQuiz } from "@/components/AssessmentQuiz";
 import { AIAssistant } from "@/components/AIAssistant";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Sparkles, Lightbulb, Target } from "lucide-react";
 import { VocabCard } from "@/components/VocabCard";
 
@@ -121,6 +121,27 @@ const Index = () => {
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
             Master the building blocks of algebra through personalized, interactive learning
           </p>
+        </div>
+      </div>
+
+      {/* Start Journey Banner */}
+      <div className="bg-card border-b border-border py-6">
+        <div className="container max-w-5xl mx-auto px-4">
+          <Card className="p-6 bg-gradient-to-r from-primary/10 to-secondary/10 border-2 border-primary/20">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="text-center md:text-left">
+                <h3 className="font-bold text-lg mb-1">New to this lesson?</h3>
+                <p className="text-sm text-muted-foreground">Start with personalization to get the best learning experience</p>
+              </div>
+              <Button 
+                onClick={() => window.location.href = '/personalization'}
+                className="bg-primary hover:bg-primary/90"
+                size="lg"
+              >
+                Start Your Journey
+              </Button>
+            </div>
+          </Card>
         </div>
       </div>
 
@@ -307,139 +328,53 @@ const Index = () => {
         />
       </LearningSection>
 
-      {/* Example Problems */}
+      {/* Practice Problems */}
       <LearningSection
         id="examples"
         title="Practice Problems"
-        subtitle="Adapted to your learning style"
+        subtitle="Test your understanding with multiple choice questions"
         variant="highlight"
       >
-        <LearningStyleTabs
-          problem={{
-            visual: (
-              <div className="space-y-4">
-                <h4 className="font-bold text-lg">Problem: Simplify 2x + 3x</h4>
-                <div className="bg-visual/10 border-2 border-visual rounded-lg p-6">
-                  <p className="text-center mb-4">Visual representation:</p>
-                  <div className="flex justify-center gap-4 mb-6">
-                    <div className="space-y-2">
-                      <div className="flex gap-2">
-                        <div className="w-12 h-12 bg-visual rounded flex items-center justify-center text-white font-bold">x</div>
-                        <div className="w-12 h-12 bg-visual rounded flex items-center justify-center text-white font-bold">x</div>
-                      </div>
-                      <p className="text-center text-sm font-semibold">2x</p>
-                    </div>
-                    <div className="flex items-center text-3xl font-bold text-visual">+</div>
-                    <div className="space-y-2">
-                      <div className="flex gap-2">
-                        <div className="w-12 h-12 bg-visual rounded flex items-center justify-center text-white font-bold">x</div>
-                        <div className="w-12 h-12 bg-visual rounded flex items-center justify-center text-white font-bold">x</div>
-                        <div className="w-12 h-12 bg-visual rounded flex items-center justify-center text-white font-bold">x</div>
-                      </div>
-                      <p className="text-center text-sm font-semibold">3x</p>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <p className="mb-2">Count all the x's:</p>
-                    <div className="flex justify-center gap-2">
-                      {[...Array(5)].map((_, i) => (
-                        <div key={i} className="w-12 h-12 bg-success rounded flex items-center justify-center text-white font-bold">x</div>
-                      ))}
-                    </div>
-                    <p className="text-2xl font-bold text-success mt-4">= 5x</p>
-                  </div>
-                </div>
-              </div>
-            ),
-            verbal: (
-              <div className="space-y-4">
-                <h4 className="font-bold text-lg">Problem: Simplify 2x + 3x</h4>
-                <div className="bg-verbal/10 border-2 border-verbal rounded-lg p-6">
-                  <div className="space-y-4">
-                    <p>🗣️ <strong>Let's talk through this:</strong></p>
-                    <p>"We have 2 of something unknown (that's 2x), and then we're adding 3 more of that same unknown thing (that's 3x)."</p>
-                    <p>"If I have 2 apples and you give me 3 more apples, I now have 5 apples total, right?"</p>
-                    <p>"The same logic applies here: 2 x's plus 3 x's equals 5 x's."</p>
-                    <div className="bg-verbal/20 p-4 rounded-lg">
-                      <p className="font-bold">In words:</p>
-                      <p>"Two x <span className="text-verbal font-bold">plus</span> three x <span className="text-verbal font-bold">equals</span> five x"</p>
-                    </div>
-                    <p className="text-2xl font-bold text-success text-center mt-4">Answer: 5x</p>
-                  </div>
-                </div>
-              </div>
-            ),
-            logical: (
-              <div className="space-y-4">
-                <h4 className="font-bold text-lg">Problem: Simplify 2x + 3x</h4>
-                <div className="bg-logical/10 border-2 border-logical rounded-lg p-6">
-                  <div className="space-y-4">
-                    <div className="bg-card p-4 rounded border-2 border-logical/30">
-                      <p className="font-semibold mb-2">🧠 Pattern Recognition:</p>
-                      <p className="font-mono">2x + 3x</p>
-                    </div>
-                    
-                    <div className="bg-card p-4 rounded border-2 border-logical/30">
-                      <p className="font-semibold mb-2">Step 1: Identify like terms</p>
-                      <p>Both terms have the variable 'x' → They are <strong>like terms</strong></p>
-                    </div>
-
-                    <div className="bg-card p-4 rounded border-2 border-logical/30">
-                      <p className="font-semibold mb-2">Step 2: Apply the rule</p>
-                      <p className="font-mono">ax + bx = (a + b)x</p>
-                      <p className="text-sm text-muted-foreground mt-2">Combine coefficients, keep the variable</p>
-                    </div>
-
-                    <div className="bg-card p-4 rounded border-2 border-logical/30">
-                      <p className="font-semibold mb-2">Step 3: Calculate</p>
-                      <p className="font-mono">2x + 3x = (2 + 3)x = 5x</p>
-                    </div>
-
-                    <p className="text-2xl font-bold text-success text-center mt-4">Result: 5x</p>
-                  </div>
-                </div>
-              </div>
-            ),
-            kinesthetic: (
-              <div className="space-y-4">
-                <h4 className="font-bold text-lg">Problem: Simplify 2x + 3x</h4>
-                <div className="bg-kinesthetic/10 border-2 border-kinesthetic rounded-lg p-6">
-                  <p className="mb-4">✋ <strong>Try this interactive approach:</strong></p>
-                  
-                  <div className="space-y-6">
-                    <div className="bg-card p-4 rounded-lg">
-                      <p className="font-semibold mb-3">Step 1: Write it out with your finger</p>
-                      <div className="bg-background p-6 rounded-lg border-2 border-dashed border-kinesthetic">
-                        <p className="text-3xl font-mono text-center">2x + 3x = ___</p>
-                      </div>
-                    </div>
-
-                    <div className="bg-card p-4 rounded-lg">
-                      <p className="font-semibold mb-3">Step 2: Use physical objects</p>
-                      <p className="text-sm mb-2">Take 5 similar objects (coins, buttons, etc.)</p>
-                      <p className="text-sm">• Put 2 in one pile (this is 2x)</p>
-                      <p className="text-sm">• Put 3 in another pile (this is 3x)</p>
-                      <p className="text-sm">• Combine them: How many total?</p>
-                    </div>
-
-                    <div className="bg-card p-4 rounded-lg">
-                      <p className="font-semibold mb-3">Step 3: Draw it</p>
-                      <p className="text-sm">Sketch 2 boxes, then 3 more boxes next to them. Count all boxes together.</p>
-                    </div>
-
-                    <div className="bg-success/20 p-4 rounded-lg text-center">
-                      <p className="text-2xl font-bold text-success">You get: 5x</p>
-                      <p className="text-sm mt-2">You physically combined the x's!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ),
-          }}
-        />
+        <AssessmentQuiz questions={[
+          {
+            id: "p1",
+            question: "Simplify: 7x + 2x",
+            options: ["9x", "9x²", "14x", "7x + 2x"],
+            correctAnswer: 0,
+            explanation: "When combining like terms, add the coefficients: 7 + 2 = 9, so 7x + 2x = 9x"
+          },
+          {
+            id: "p2",
+            question: "In the expression 8y - 3, what is the constant?",
+            options: ["8", "y", "-3", "8y"],
+            correctAnswer: 2,
+            explanation: "The constant is the number without a variable. In this expression, -3 is the constant term."
+          },
+          {
+            id: "p3",
+            question: "Which expression represents 'five times a number n, plus seven'?",
+            options: ["5 + n + 7", "5n + 7", "5(n + 7)", "n + 5 + 7"],
+            correctAnswer: 1,
+            explanation: "'Five times a number n' means 5n, and 'plus seven' means +7, giving us 5n + 7"
+          },
+          {
+            id: "p4",
+            question: "What is the coefficient in the term -4x?",
+            options: ["4", "x", "-4", "-4x"],
+            correctAnswer: 2,
+            explanation: "The coefficient includes the sign, so in -4x, the coefficient is -4"
+          },
+          {
+            id: "p5",
+            question: "Simplify: 3a + 2b + 5a",
+            options: ["10ab", "8a + 2b", "10a + 2b", "3a + 7b"],
+            correctAnswer: 1,
+            explanation: "Combine like terms: 3a + 5a = 8a. The 2b stays separate because it has a different variable: 8a + 2b"
+          },
+        ]} />
         <AIAssistant
           sectionTitle="Practice Problems"
-          helpText="Now it's time to apply what you've learned! These problems are tailored to your learning style. Work through them at your own pace - there's no rush!"
+          helpText="Now it's time to apply what you've learned! Work through these at your own pace. If you get stuck, try reviewing the vocabulary and concept sections above!"
         />
       </LearningSection>
 
