@@ -3,8 +3,16 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { CheckCircle2, XCircle, Award } from "lucide-react";
+import { CheckCircle2, XCircle, Award, AlertCircle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface QuizQuestion {
   id: string;
@@ -24,6 +32,7 @@ export const AssessmentQuiz = ({ questions }: AssessmentQuizProps) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [showWhyDialog, setShowWhyDialog] = useState(false);
 
   const handleSubmit = () => {
     const isCorrect = parseInt(selectedAnswer) === questions[currentQuestion].correctAnswer;
@@ -137,28 +146,61 @@ export const AssessmentQuiz = ({ questions }: AssessmentQuizProps) => {
                 <XCircle className="w-5 h-5 text-destructive" />
               )}
               <span className="font-semibold">
-                {isCorrect ? "Correct!" : "Not quite"}
+                {isCorrect ? "Correct! Great job!" : "Incorrect"}
               </span>
             </div>
-            <p className="text-sm">{question.explanation}</p>
           </div>
         )}
 
-        <div className="mt-6 flex justify-end">
-          {!showFeedback ? (
+        <div className="mt-6 flex justify-between items-center">
+          {showFeedback && !isCorrect && (
             <Button
-              onClick={handleSubmit}
-              disabled={!selectedAnswer}
-              className="bg-primary hover:bg-primary/90"
+              variant="outline"
+              onClick={() => setShowWhyDialog(true)}
+              className="flex items-center gap-2"
             >
-              Submit Answer
-            </Button>
-          ) : (
-            <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
-              {currentQuestion < questions.length - 1 ? "Next Question" : "Complete"}
+              <AlertCircle className="w-4 h-4" />
+              Why?
             </Button>
           )}
+          <div className="flex-1 flex justify-end">
+            {!showFeedback ? (
+              <Button
+                onClick={handleSubmit}
+                disabled={!selectedAnswer}
+                className="bg-primary hover:bg-primary/90"
+              >
+                Submit Answer
+              </Button>
+            ) : (
+              <Button onClick={handleNext} className="bg-primary hover:bg-primary/90">
+                {currentQuestion < questions.length - 1 ? "Next Question" : "Finish"}
+              </Button>
+            )}
+          </div>
         </div>
+
+        {/* Why Dialog */}
+        <AlertDialog open={showWhyDialog} onOpenChange={setShowWhyDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 text-primary" />
+                </div>
+                Let me explain!
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-base leading-relaxed pt-4">
+                {question.explanation}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <Button onClick={() => setShowWhyDialog(false)} className="bg-primary hover:bg-primary/90">
+                Got it, thanks!
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </Card>
     </div>
   );

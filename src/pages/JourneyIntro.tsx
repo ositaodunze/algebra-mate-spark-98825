@@ -4,30 +4,23 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Rocket, Target, Sparkles, TrendingUp } from "lucide-react";
+import { Rocket, Target, Sparkles, Star } from "lucide-react";
 
 const JourneyIntro = () => {
   const navigate = useNavigate();
-  const [score, setScore] = useState(0);
   const [interests, setInterests] = useState<string[]>([]);
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
-    const savedScore = localStorage.getItem("preAssessmentScore");
     const savedInterests = localStorage.getItem("userInterests");
-    
-    setScore(savedScore ? parseInt(savedScore) : 0);
     setInterests(savedInterests ? JSON.parse(savedInterests) : []);
+    
+    // Award 50 points for completing the assessment
+    setPoints(50);
   }, []);
 
-  const getLevel = () => {
-    if (score >= 8) return { name: "Advanced", color: "text-success", icon: TrendingUp };
-    if (score >= 5) return { name: "Intermediate", color: "text-primary", icon: Target };
-    return { name: "Beginner", color: "text-secondary", icon: Sparkles };
-  };
-
-  const level = getLevel();
-  const percentage = (score / 10) * 100;
-  const LevelIcon = level.icon;
+  // Beginner level progress (0-100 points for level 1)
+  const progressPercentage = Math.min((points / 100) * 100, 100);
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,27 +40,35 @@ const JourneyIntro = () => {
 
       <div className="container max-w-4xl mx-auto px-4 py-12">
         <div className="space-y-8">
-          {/* Assessment Results */}
-          <Card className="p-8 shadow-medium">
-            <h2 className="text-2xl font-bold mb-6">Your Assessment Results</h2>
-            
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className={`w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center`}>
-                  <LevelIcon className={`w-6 h-6 ${level.color}`} />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Current Level</p>
-                  <p className={`text-xl font-bold ${level.color}`}>{level.name}</p>
-                </div>
+          {/* Points and Progress */}
+          <Card className="p-8 shadow-medium bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">Assessment Complete!</h2>
+                <p className="text-muted-foreground">You've earned points for completing the pre-assessment</p>
               </div>
               <div className="text-right">
-                <p className="text-3xl font-bold text-primary">{score}/10</p>
-                <p className="text-sm text-muted-foreground">Correct Answers</p>
+                <div className="flex items-center gap-2 justify-end mb-1">
+                  <Star className="w-6 h-6 text-primary fill-primary" />
+                  <p className="text-4xl font-bold text-primary">{points}</p>
+                </div>
+                <p className="text-sm text-muted-foreground">Points Earned</p>
               </div>
             </div>
-
-            <Progress value={percentage} className="h-3" />
+            
+            <div className="space-y-3">
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-secondary" />
+                  <span className="font-semibold">Level 1: Beginner</span>
+                </div>
+                <span className="text-muted-foreground">{points}/100 Points</span>
+              </div>
+              <Progress value={progressPercentage} className="h-3" />
+              <p className="text-xs text-muted-foreground">
+                Keep learning to reach Level 2! Earn points by completing lessons and activities.
+              </p>
+            </div>
           </Card>
 
           {/* Personalized Interests */}

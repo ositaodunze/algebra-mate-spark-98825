@@ -1,9 +1,16 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const [userAvatar, setUserAvatar] = useState("");
+
+  useEffect(() => {
+    const avatar = localStorage.getItem("userAvatar");
+    setUserAvatar(avatar || "");
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
@@ -15,7 +22,11 @@ export const Header = () => {
           onClick={() => navigate('/personalization')}
           className="gap-2"
         >
-          <User className="w-4 h-4" />
+          {userAvatar && (
+            <Avatar className="w-6 h-6">
+              <AvatarFallback className="text-sm">{userAvatar}</AvatarFallback>
+            </Avatar>
+          )}
           Account
         </Button>
       </div>

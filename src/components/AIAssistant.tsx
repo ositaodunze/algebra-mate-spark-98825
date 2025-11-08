@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Bot, X, Minimize2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,14 @@ interface AIAssistantProps {
 
 export const AIAssistant = ({ sectionTitle, helpText }: AIAssistantProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [companionName, setCompanionName] = useState("AI Tutor");
+
+  useEffect(() => {
+    const companion = localStorage.getItem("userCompanion");
+    if (companion) {
+      setCompanionName(companion);
+    }
+  }, []);
 
   return (
     <div className="fixed bottom-0 right-8 z-40 transition-all duration-300">
@@ -26,7 +34,7 @@ export const AIAssistant = ({ sectionTitle, helpText }: AIAssistantProps) => {
           <div className="bg-gradient-to-r from-primary to-primary/80 p-4 flex items-center justify-between rounded-t-lg">
             <div className="flex items-center gap-2">
               <Bot className="w-5 h-5 text-primary-foreground" />
-              <span className="font-semibold text-primary-foreground">AI Tutor</span>
+              <span className="font-semibold text-primary-foreground">{companionName}</span>
             </div>
             <Button
               variant="ghost"

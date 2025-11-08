@@ -105,18 +105,22 @@ const PreAssessment = () => {
     },
   ];
 
-  const handleNoticeResponse = (ready: boolean) => {
-    if (ready) {
-      setShowNotice(false);
-      setShowTutorIntro(true);
-    } else {
-      navigate("/");
-    }
-  };
+  useEffect(() => {
+    setShowTutorIntro(true);
+  }, []);
 
   const handleTutorIntroContinue = () => {
     setShowTutorIntro(false);
-    setHasStarted(true);
+    setShowNotice(true);
+  };
+
+  const handleNoticeResponse = (ready: boolean) => {
+    if (ready) {
+      setShowNotice(false);
+      setHasStarted(true);
+    } else {
+      navigate("/");
+    }
   };
 
   const handleNext = () => {
@@ -127,8 +131,9 @@ const PreAssessment = () => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer("");
     } else {
-      // Calculate score and navigate to journey intro
-      const score = answers.filter((a, i) => a === questions[i].correctAnswer).length;
+      // Complete the assessment and navigate to journey intro
+      const finalAnswers = [...answers, answer];
+      const score = finalAnswers.filter((a, i) => a === questions[i].correctAnswer).length;
       localStorage.setItem("preAssessmentScore", score.toString());
       navigate("/journey-intro");
     }

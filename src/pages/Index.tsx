@@ -126,27 +126,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Start Journey Banner */}
-      <div className="bg-card border-b border-border py-6">
-        <div className="container max-w-5xl mx-auto px-4">
-          <Card className="p-6 bg-gradient-to-r from-primary/10 to-secondary/10 border-2 border-primary/20">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <div className="text-center md:text-left">
-                <h3 className="font-bold text-lg mb-1">New to this lesson?</h3>
-                <p className="text-sm text-muted-foreground">Start with personalization to get the best learning experience</p>
-              </div>
-              <Button 
-                onClick={() => window.location.href = '/'}
-                className="bg-primary hover:bg-primary/90"
-                size="lg"
-              >
-                Start Your Journey
-              </Button>
-            </div>
-          </Card>
-        </div>
-      </div>
-
       {/* Introduction */}
       <LearningSection
         id="intro"
