@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Header } from "@/components/Header";
 import { LearningSection } from "@/components/LearningSection";
 import { ProgressStepper } from "@/components/ProgressStepper";
 import { VideoPlayer } from "@/components/VideoPlayer";
@@ -8,7 +9,7 @@ import { AIAssistant } from "@/components/AIAssistant";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Lightbulb, Target } from "lucide-react";
+import { Sparkles, Lightbulb, Target, Gamepad2 } from "lucide-react";
 import { VocabCard } from "@/components/VocabCard";
 
 const Index = () => {
@@ -103,7 +104,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <ProgressStepper 
+      <Header />
+      <ProgressStepper
         steps={steps} 
         currentStep={currentStep}
         onStepClick={handleStepClick}
@@ -134,7 +136,7 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground">Start with personalization to get the best learning experience</p>
               </div>
               <Button 
-                onClick={() => window.location.href = '/personalization'}
+                onClick={() => window.location.href = '/'}
                 className="bg-primary hover:bg-primary/90"
                 size="lg"
               >
@@ -376,6 +378,26 @@ const Index = () => {
           sectionTitle="Practice Problems"
           helpText="Now it's time to apply what you've learned! Work through these at your own pace. If you get stuck, try reviewing the vocabulary and concept sections above!"
         />
+      </LearningSection>
+
+      {/* Unity Game Activity */}
+      <LearningSection
+        id="game-activity"
+        title="Interactive Activity"
+        subtitle="Apply your skills in a fun game environment"
+      >
+        <Card className="p-8 border-2 border-dashed border-primary/30 bg-primary/5">
+          <div className="flex flex-col items-center justify-center min-h-[400px] text-center space-y-4">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+              <Gamepad2 className="w-10 h-10 text-primary" />
+            </div>
+            <h3 className="text-2xl font-bold">Unity Game Activity</h3>
+            <p className="text-muted-foreground max-w-md">
+              An interactive Unity game will be embedded here to help you practice expressions and variables in a fun, gamified way!
+            </p>
+            <Badge variant="secondary" className="text-sm">Coming Soon</Badge>
+          </div>
+        </Card>
       </LearningSection>
 
       {/* Recap */}
