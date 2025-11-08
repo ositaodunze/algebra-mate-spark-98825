@@ -105,7 +105,7 @@ const Personalization = () => {
           emoji: "🎨",
           message: (
             <div className="space-y-2">
-                <p className="font-bold text-lg">Last step - tell us what you love! ❤️</p>
+                <p className="font-bold text-lg">Last step - what are your interests? 🎯</p>
                 <p>Pick your top 2 favorites! We'll create math problems about things you actually care about. Way more fun than boring textbook examples!</p>
             </div>
           )
@@ -130,7 +130,7 @@ const Personalization = () => {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center animate-slide-up">
             {currentStep === 1 && "Choose Your Avatar 🎭"}
             {currentStep === 2 && "Pick Your Companion 🤖"}
-            {currentStep === 3 && "What Do You Love? 💖"}
+            {currentStep === 3 && "What Are Your Interests? 🎯"}
           </h1>
         </div>
       </div>
@@ -222,7 +222,7 @@ const Personalization = () => {
           {currentStep === 3 && (
             <div className="space-y-6">
               <div className="text-center">
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">What do you love? 💕</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">What are your interests? 🎯</h2>
                 <p className="text-muted-foreground">
                   Pick your top 2 favorite things! We'll use these to create examples you'll actually enjoy.
                 </p>
