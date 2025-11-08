@@ -125,6 +125,11 @@ const Index = () => {
     return !completedSections.includes(steps[index - 1].id);
   };
 
+  const isSectionVisible = (index: number) => {
+    if (index === 0) return true;
+    return completedSections.includes(steps[index - 1].id);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -150,6 +155,7 @@ const Index = () => {
       </div>
 
       {/* Introduction */}
+      {isSectionVisible(0) && (
       <LearningSection
         id="intro"
         title="Introduction"
@@ -193,9 +199,16 @@ const Index = () => {
           sectionTitle="Welcome to Algebra!"
           helpText="I'm here to help you through this lesson! This introduction is personalized just for you based on your interests. After watching, we'll dive deeper into each concept together."
         />
+        <div className="mt-6 text-center">
+          <Button onClick={() => markSectionComplete("intro")} size="lg">
+            Complete Introduction & Continue
+          </Button>
+        </div>
       </LearningSection>
+      )}
 
       {/* Vocabulary */}
+      {isSectionVisible(1) && (
       <LearningSection
         id="vocab"
         title="New Vocabulary"
@@ -216,9 +229,16 @@ const Index = () => {
           sectionTitle="Understanding Vocabulary"
           helpText="These terms are the building blocks of algebra! Take your time with each one. Try to connect them to things you already know. If something is confusing, just ask me!"
         />
+        <div className="mt-6 text-center">
+          <Button onClick={() => markSectionComplete("vocab")} size="lg">
+            Complete Vocabulary & Continue
+          </Button>
+        </div>
       </LearningSection>
+      )}
 
       {/* Real-Life Applications */}
+      {isSectionVisible(2) && (
       <LearningSection
         id="application"
         title="Real-Life Applications"
@@ -323,9 +343,16 @@ const Index = () => {
             </>
           )}
         </div>
+        <div className="mt-6 text-center">
+          <Button onClick={() => markSectionComplete("application")} size="lg">
+            Complete Applications & Continue
+          </Button>
+        </div>
       </LearningSection>
+      )}
 
       {/* Main Concept */}
+      {isSectionVisible(3) && (
       <LearningSection
         id="concept"
         title="Core Concept Explanation"
@@ -370,9 +397,16 @@ const Index = () => {
           sectionTitle="Core Concepts"
           helpText="This is the heart of today's lesson! Variables are like containers that hold unknown values. Don't worry if it seems abstract - we'll practice with real examples soon!"
         />
+        <div className="mt-6 text-center">
+          <Button onClick={() => markSectionComplete("concept")} size="lg">
+            Complete Concept & Continue
+          </Button>
+        </div>
       </LearningSection>
+      )}
 
       {/* Guided Practice with AI Chat */}
+      {isSectionVisible(4) && (
       <LearningSection
         id="discussion"
         title="Guided Practice"
@@ -472,8 +506,10 @@ const Index = () => {
           </div>
         )}
       </LearningSection>
+      )}
 
       {/* Practice Problems */}
+      {isSectionVisible(5) && (
       <LearningSection
         id="examples"
         title="Practice Problems"
@@ -538,8 +574,10 @@ const Index = () => {
         ]} />
         )}
       </LearningSection>
+      )}
 
       {/* Unity Game Activity */}
+      {isSectionVisible(6) && (
       <LearningSection
         id="game-activity"
         title="Interactive Activity"
@@ -557,9 +595,16 @@ const Index = () => {
             <Badge variant="secondary" className="text-sm">Coming Soon</Badge>
           </div>
         </Card>
+        <div className="mt-6 text-center">
+          <Button onClick={() => markSectionComplete("game-activity")} size="lg">
+            Complete Activity & Continue
+          </Button>
+        </div>
       </LearningSection>
+      )}
 
       {/* Recap */}
+      {isSectionVisible(7) && (
       <LearningSection
         id="recap"
         title="Lesson Recap"
@@ -611,49 +656,3 @@ const Index = () => {
             </div>
           </div>
         </Card>
-      </LearningSection>
-
-      {/* Assessment */}
-      <LearningSection
-        id="assessment"
-        title="Knowledge Check"
-        subtitle="Test your understanding of expressions and variables"
-        variant="highlight"
-      >
-        {isSectionLocked(7) ? (
-          <Card className="p-12 text-center bg-muted/50">
-            <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
-              <span className="text-3xl">🔒</span>
-            </div>
-            <h3 className="text-xl font-bold mb-2">Assessment Locked</h3>
-            <p className="text-muted-foreground mb-4">
-              Complete all previous sections to unlock the final assessment!
-            </p>
-            <Button 
-              onClick={() => markSectionComplete(steps[6].id)}
-              className="mt-2"
-            >
-              Unlock Section (Dev Mode)
-            </Button>
-          </Card>
-        ) : (
-          <AssessmentQuiz 
-            questions={quizQuestions}
-            onComplete={() => markSectionComplete("assessment")} 
-          />
-        )}
-      </LearningSection>
-
-      {/* Footer */}
-      <div className="bg-card border-t border-border py-8 mb-20">
-        <div className="container max-w-5xl mx-auto px-4 text-center text-muted-foreground">
-          <p>Great work on completing this lesson! 🎉</p>
-        </div>
-      </div>
-
-      <BottomChat />
-    </div>
-  );
-};
-
-export default Index;
