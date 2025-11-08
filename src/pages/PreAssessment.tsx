@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Brain, CheckCircle2, XCircle, Timer, Trophy, Zap } from "lucide-react";
+import { Brain, CheckCircle2, XCircle, Timer, Trophy, Zap, Award, Sparkles } from "lucide-react";
 import { Calculator } from "@/components/Calculator";
 import { ScratchPad } from "@/components/ScratchPad";
 import { AIAssistant } from "@/components/AIAssistant";
@@ -28,10 +28,7 @@ const PreAssessment = () => {
   const [showCalculator, setShowCalculator] = useState(false);
   const [showScratchPad, setShowScratchPad] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30);
-  const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
 
   const questions: Question[] = [
     {
@@ -106,25 +103,6 @@ const PreAssessment = () => {
     },
   ];
 
-  useEffect(() => {
-    if (hasStarted && !showResult && timeLeft > 0) {
-      const timer = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            handleTimeout();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [hasStarted, showResult, timeLeft]);
-
-  const handleTimeout = () => {
-    setShowResult(true);
-    setIsCorrect(false);
-  };
 
   const handleProfessorIntroContinue = () => {
     setShowProfessorIntro(false);
@@ -135,42 +113,26 @@ const PreAssessment = () => {
     if (ready) {
       setShowNotice(false);
       setHasStarted(true);
-      setTimeLeft(30);
     } else {
       navigate("/");
     }
   };
 
   const handleAnswerSelect = (index: number) => {
-    if (showResult) return;
-    
     setSelectedAnswer(index);
-    const correct = index === questions[currentQuestion].correctAnswer;
-    setIsCorrect(correct);
-    setShowResult(true);
-    
-    if (correct) {
-      const timeBonus = Math.floor(timeLeft / 5);
-      setScore(score + 100 + timeBonus);
-    }
-  };
-
-  const handleNext = () => {
-    setAnswers([...answers, selectedAnswer!]);
-    setShowResult(false);
-    setSelectedAnswer(null);
+    setAnswers([...answers, index]);
     
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      setTimeLeft(30);
+      setSelectedAnswer(null);
     } else {
-      const finalAnswers = [...answers, selectedAnswer!];
+      const finalAnswers = [...answers, index];
       const correctCount = finalAnswers.filter((a, i) => a === questions[i].correctAnswer).length;
       localStorage.setItem("preAssessmentScore", correctCount.toString());
-      localStorage.setItem("preAssessmentPoints", score.toString());
-      navigate("/journey-intro");
+      setShowResult(true);
     }
   };
+
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;
   const question = questions[currentQuestion];
@@ -251,19 +213,19 @@ const PreAssessment = () => {
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">✓</span>
-                    <span>10 quick questions with 30 seconds each</span>
+                    <span>10 quick questions - answer at your own pace</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">✓</span>
-                    <span>Earn points for correct answers + time bonuses!</span>
+                    <span>No right or wrong - just exploring what you know!</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">✓</span>
-                    <span>Use the calculator and scratch pad tools to help you</span>
+                    <span>Earn a special badge when you complete it</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-0.5">✓</span>
-                    <span>Don't worry about perfection - this helps us personalize your journey!</span>
+                    <span>This helps us personalize your learning journey!</span>
                   </li>
                 </ul>
               </div>
@@ -298,26 +260,16 @@ const PreAssessment = () => {
       <ScratchPad open={showScratchPad} onOpenChange={setShowScratchPad} />
 
       {/* Quiz Interface */}
-      {hasStarted && (
+      {hasStarted && !showResult && (
         <div className="min-h-screen bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-pink-500/10 py-8">
           <div className="container max-w-5xl mx-auto px-4">
-            {/* Score and Timer Header */}
-            <div className="flex justify-between items-center mb-6">
-              <Card className="px-6 py-3 flex items-center gap-3 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
-                <Trophy className="w-6 h-6 text-primary" />
+            {/* Progress Header */}
+            <div className="flex justify-center items-center mb-6">
+              <Card className="px-8 py-4 flex items-center gap-3 border-2 border-primary/20">
+                <Brain className="w-6 h-6 text-primary" />
                 <div>
-                  <p className="text-xs text-muted-foreground">Score</p>
-                  <p className="text-2xl font-bold text-primary">{score}</p>
-                </div>
-              </Card>
-              
-              <Card className={`px-6 py-3 flex items-center gap-3 border-2 ${
-                timeLeft <= 10 ? 'border-destructive/50 bg-destructive/10' : 'border-accent/20 bg-accent/5'
-              }`}>
-                <Timer className={`w-6 h-6 ${timeLeft <= 10 ? 'text-destructive' : 'text-accent'}`} />
-                <div>
-                  <p className="text-xs text-muted-foreground">Time</p>
-                  <p className={`text-2xl font-bold ${timeLeft <= 10 ? 'text-destructive' : 'text-accent'}`}>{timeLeft}s</p>
+                  <p className="text-sm text-muted-foreground">Progress</p>
+                  <p className="text-lg font-bold">{currentQuestion + 1} / {questions.length}</p>
                 </div>
               </Card>
             </div>
@@ -358,14 +310,8 @@ const PreAssessment = () => {
                       ];
                       const color = colors[index];
                       
-                      const isSelected = selectedAnswer === index;
-                      const isCorrectAnswer = index === question.correctAnswer;
-                      
                       let buttonClass = `relative h-32 rounded-2xl border-4 transition-all duration-300 ${color.text} font-bold text-lg
-                        ${!showResult ? `bg-gradient-to-br ${color.bg} ${color.hover} ${color.border} hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl` : ''}
-                        ${showResult && isCorrectAnswer ? 'bg-gradient-to-br from-green-400 to-green-600 border-green-500 scale-105' : ''}
-                        ${showResult && isSelected && !isCorrect ? 'bg-gradient-to-br from-gray-400 to-gray-600 border-gray-500 opacity-50' : ''}
-                        ${showResult && !isSelected && !isCorrectAnswer ? 'opacity-40' : ''}
+                        bg-gradient-to-br ${color.bg} ${color.hover} ${color.border} hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl
                       `;
                       
                       return (
@@ -373,64 +319,75 @@ const PreAssessment = () => {
                           key={index}
                           className={buttonClass}
                           onClick={() => handleAnswerSelect(index)}
-                          disabled={showResult}
                         >
                           <div className="flex flex-col items-center justify-center h-full gap-2 p-4">
                             <div className="text-3xl font-black">{String.fromCharCode(65 + index)}</div>
                             <div className="text-base md:text-lg">{option}</div>
                           </div>
-                          {showResult && isCorrectAnswer && (
-                            <CheckCircle2 className="absolute top-3 right-3 w-8 h-8 text-white animate-bounce" />
-                          )}
-                          {showResult && isSelected && !isCorrect && (
-                            <XCircle className="absolute top-3 right-3 w-8 h-8 text-white" />
-                          )}
                         </button>
                       );
                     })}
                   </div>
                 </div>
-
-                {/* Result Feedback */}
-                {showResult && (
-                  <div className="text-center animate-fade-in">
-                    <Card className={`p-6 border-2 ${isCorrect ? 'bg-green-500/10 border-green-500' : 'bg-red-500/10 border-red-500'}`}>
-                      <div className="flex items-center justify-center gap-3 mb-3">
-                        {isCorrect ? (
-                          <>
-                            <CheckCircle2 className="w-8 h-8 text-green-600" />
-                            <h3 className="text-2xl font-bold text-green-600">Correct! 🎉</h3>
-                          </>
-                        ) : (
-                          <>
-                            <XCircle className="w-8 h-8 text-red-600" />
-                            <h3 className="text-2xl font-bold text-red-600">Not quite!</h3>
-                          </>
-                        )}
-                      </div>
-                      {isCorrect && (
-                        <p className="text-muted-foreground">+{100 + Math.floor(timeLeft / 5)} points (includes time bonus!)</p>
-                      )}
-                    </Card>
-                    <Button
-                      onClick={handleNext}
-                      size="lg"
-                      className="mt-6 min-w-[200px] text-lg"
-                      variant="fun"
-                    >
-                      {currentQuestion === questions.length - 1 ? "🏁 Finish" : "Next Question →"}
-                    </Button>
-                  </div>
-                )}
               </div>
             </Card>
           </div>
 
           {/* Tools */}
           <AIAssistant 
-            sectionTitle="Pre-Assessment Help"
-            helpText="Need help? Use the calculator and scratch pad tools! Remember, this is just to help us understand your level - don't stress about perfection!"
+            sectionTitle="Pre-Assessment"
+            helpText="Take your time with each question. This helps us understand what you know so we can create the perfect learning path for you!"
           />
+        </div>
+      )}
+
+      {/* Badge Completion Screen */}
+      {showResult && (
+        <div className="min-h-screen bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-pink-500/10 flex items-center justify-center py-12 px-4">
+          <Card className="max-w-2xl w-full p-12 text-center shadow-glow border-2 border-primary/20 animate-scale-in">
+            <div className="flex justify-center mb-8">
+              <div className="relative">
+                <div className="w-32 h-32 rounded-full bg-gradient-primary flex items-center justify-center shadow-glow animate-bounce-gentle">
+                  <Award className="w-16 h-16 text-white" />
+                </div>
+                <div className="absolute -top-2 -right-2">
+                  <Sparkles className="w-8 h-8 text-yellow-400 fill-yellow-400" />
+                </div>
+                <div className="absolute -bottom-2 -left-2">
+                  <Sparkles className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+            </div>
+
+            <Badge className="mb-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white border-0 text-lg px-6 py-2">
+              Achievement Unlocked!
+            </Badge>
+
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-hero bg-clip-text text-transparent">
+              Pre-Assessment Complete!
+            </h1>
+
+            <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
+              Amazing work! You've earned the <span className="font-bold text-primary">Explorer Badge</span> 🏆
+            </p>
+
+            <div className="bg-primary/10 border-2 border-primary/20 rounded-lg p-6 mb-8">
+              <h2 className="font-semibold text-lg mb-3">What's Next?</h2>
+              <p className="text-muted-foreground">
+                I've analyzed your responses and created a personalized learning path just for you! 
+                Let's start your math adventure with lessons perfectly matched to your level.
+              </p>
+            </div>
+
+            <Button
+              onClick={() => navigate("/journey-intro")}
+              size="lg"
+              variant="fun"
+              className="text-lg px-12 py-7 h-auto shadow-glow hover:scale-105 transition-all duration-300"
+            >
+              🚀 Continue Your Journey
+            </Button>
+          </Card>
         </div>
       )}
     </>

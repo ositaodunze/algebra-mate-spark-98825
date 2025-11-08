@@ -14,6 +14,7 @@ import { VocabCard } from "@/components/VocabCard";
 
 const Index = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [completedSections, setCompletedSections] = useState<string[]>([]);
 
   const steps = [
     { id: "intro", label: "Introduction" },
@@ -98,8 +99,22 @@ const Index = () => {
   }, []);
 
   const handleStepClick = (index: number) => {
-    const element = document.getElementById(steps[index].id);
-    element?.scrollIntoView({ behavior: "smooth" });
+    const stepId = steps[index].id;
+    if (index === 0 || completedSections.includes(steps[index - 1].id)) {
+      const element = document.getElementById(stepId);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const markSectionComplete = (sectionId: string) => {
+    if (!completedSections.includes(sectionId)) {
+      setCompletedSections([...completedSections, sectionId]);
+    }
+  };
+
+  const isSectionLocked = (index: number) => {
+    if (index === 0) return false;
+    return !completedSections.includes(steps[index - 1].id);
   };
 
   return (
@@ -281,32 +296,25 @@ const Index = () => {
         />
       </LearningSection>
 
-      {/* Discussion Questions */}
+      {/* I Do, We Do, You Do Section */}
       <LearningSection
         id="discussion"
-        title="Discussion Questions"
-        subtitle="Think deeply about these concepts with our AI tutor"
+        title="Guided Practice: I Do, We Do, You Do"
+        subtitle="Learn step-by-step with AI guidance"
       >
-        <DiscussionQuestions
-          questions={[
-            {
-              question: "Why do we use letters like 'x' and 'y' instead of just using numbers?",
-              hint: "Think about situations where you don't know the exact value yet"
-            },
-            {
-              question: "Can you create your own expression to represent buying multiple items at a store?",
-              hint: "Consider: What changes? What stays the same?"
-            },
-            {
-              question: "How is '3x' different from 'x3' or 'x + x + x'? Are they the same or different?",
-              hint: "Think about what each notation means mathematically"
-            }
-          ]}
-        />
-        <AIAssistant
-          sectionTitle="Discussion Time"
-          helpText="These questions don't have one 'right' answer - they're about exploring ideas! Your thinking process matters more than being perfect. Share your thoughts and I'll help guide you."
-        />
+        {isSectionLocked(4) ? (
+          <Card className="p-12 text-center bg-muted/50">
+            <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
+              <span className="text-3xl">🔒</span>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Section Locked</h3>
+            <p className="text-muted-foreground">
+              Complete the previous section to unlock guided practice!
+            </p>
+          </Card>
+        ) : (
+          <DiscussionQuestions onComplete={() => markSectionComplete("discussion")} />
+        )}
       </LearningSection>
 
       {/* Practice Problems */}
@@ -316,7 +324,20 @@ const Index = () => {
         subtitle="Test your understanding with multiple choice questions"
         variant="highlight"
       >
-        <AssessmentQuiz questions={[
+        {isSectionLocked(5) ? (
+          <Card className="p-12 text-center bg-muted/50">
+            <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
+              <span className="text-3xl">🔒</span>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Section Locked</h3>
+            <p className="text-muted-foreground">
+              Complete the guided practice to unlock these problems!
+            </p>
+          </Card>
+        ) : (
+          <AssessmentQuiz 
+            onComplete={() => markSectionComplete("examples")}
+            questions={[
           {
             id: "p1",
             question: "Simplify: 7x + 2x",
@@ -353,10 +374,7 @@ const Index = () => {
             explanation: "Combine like terms: 3a + 5a = 8a. The 2b stays separate because it has a different variable: 8a + 2b"
           },
         ]} />
-        <AIAssistant
-          sectionTitle="Practice Problems"
-          helpText="Now it's time to apply what you've learned! Work through these at your own pace. If you get stuck, try reviewing the vocabulary and concept sections above!"
-        />
+        )}
       </LearningSection>
 
       {/* Unity Game Activity */}
@@ -440,7 +458,22 @@ const Index = () => {
         subtitle="Test your understanding of expressions and variables"
         variant="highlight"
       >
-        <AssessmentQuiz questions={quizQuestions} />
+        {isSectionLocked(7) ? (
+          <Card className="p-12 text-center bg-muted/50">
+            <div className="w-16 h-16 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
+              <span className="text-3xl">🔒</span>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Assessment Locked</h3>
+            <p className="text-muted-foreground">
+              Complete all previous sections to unlock the final assessment!
+            </p>
+          </Card>
+        ) : (
+          <AssessmentQuiz 
+            questions={quizQuestions}
+            onComplete={() => markSectionComplete("assessment")} 
+          />
+        )}
       </LearningSection>
 
       {/* Footer */}
