@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Rocket, Star, Zap } from "lucide-react";
-import { Mascot } from "@/components/Mascot";
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -25,23 +24,6 @@ const Welcome = () => {
             </p>
           </div>
 
-          {/* Mascot Introduction */}
-          <div className="py-4">
-            <Mascot 
-              emoji="🧙‍♂️"
-              position="left"
-              variant="primary"
-              message={
-                <div className="space-y-2">
-                  <p className="font-bold text-lg">Hey there, future math genius! 👋</p>
-                  <p>
-                    I'm <span className="font-semibold text-primary">Professor Wise</span>, and I'll be your guide on this awesome math adventure! 
-                    We're going to make algebra so fun, you won't even realize you're learning. Ready to get started?
-                  </p>
-                </div>
-              }
-            />
-          </div>
 
           {/* Fun Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -74,24 +56,6 @@ const Welcome = () => {
                 Stuck? Your AI tutor is always ready to help explain things in a way that makes sense!
               </p>
             </Card>
-          </div>
-
-          {/* Another Mascot Message */}
-          <div className="py-4">
-            <Mascot 
-              emoji="🚀"
-              position="right"
-              variant="accent"
-              message={
-                <div className="space-y-2">
-                  <p className="font-bold text-lg">What makes Math4You special?</p>
-                  <p>
-                    We use examples from things YOU love - whether it's sports, gaming, music, or anything else! 
-                    Math is everywhere, and we'll show you how it connects to your world. 🌟
-                  </p>
-                </div>
-              }
-            />
           </div>
 
           {/* CTA Section */}

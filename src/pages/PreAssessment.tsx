@@ -10,7 +10,6 @@ import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFoo
 import { Brain, Calculator as CalcIcon, PenTool } from "lucide-react";
 import { Calculator } from "@/components/Calculator";
 import { ScratchPad } from "@/components/ScratchPad";
-import { TutorIntro } from "@/components/TutorIntro";
 import { AIAssistant } from "@/components/AIAssistant";
 
 interface Question {
@@ -26,8 +25,8 @@ const PreAssessment = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [answers, setAnswers] = useState<number[]>([]);
-  const [showNotice, setShowNotice] = useState(true);
-  const [showTutorIntro, setShowTutorIntro] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+  const [showProfessorIntro, setShowProfessorIntro] = useState(true);
   const [showCalculator, setShowCalculator] = useState(false);
   const [showScratchPad, setShowScratchPad] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -105,12 +104,8 @@ const PreAssessment = () => {
     },
   ];
 
-  useEffect(() => {
-    setShowTutorIntro(true);
-  }, []);
-
-  const handleTutorIntroContinue = () => {
-    setShowTutorIntro(false);
+  const handleProfessorIntroContinue = () => {
+    setShowProfessorIntro(false);
     setShowNotice(true);
   };
 
@@ -144,6 +139,120 @@ const PreAssessment = () => {
 
   return (
     <>
+      {/* Professor Wise Introduction */}
+      {showProfessorIntro && (
+        <div className="min-h-screen bg-gradient-to-b from-primary/5 via-secondary/5 to-background overflow-y-auto">
+          <div className="container max-w-4xl mx-auto px-4 py-12">
+            <div className="space-y-8 animate-slide-up">
+              
+              {/* Header */}
+              <div className="text-center space-y-4">
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-primary shadow-glow animate-bounce-gentle mb-4">
+                  <span className="text-5xl">🧙‍♂️</span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+                  Hey! I'm Professor Wise 🎓
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  I'm your personal AI tutor, and I'm super excited to be part of your math adventure! 
+                  Think of me as your always-available friend who's here to help you become a math superstar.
+                </p>
+              </div>
+
+              {/* Challenge Box */}
+              <Card className="p-8 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5 shadow-xl">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">🎮</span>
+                    <h2 className="text-2xl font-bold">Let's Start with a Fun Challenge!</h2>
+                  </div>
+                  <p className="text-base leading-relaxed">
+                    We're going to begin with a quick <span className="font-semibold text-primary">pre-assessment</span>! 
+                    Don't worry - this isn't a test you can fail. It's actually a fun way for me to get to know what you already know, 
+                    so I can create the perfect learning adventure just for you!
+                  </p>
+                  <p className="text-base leading-relaxed text-muted-foreground">
+                    Remember: It's totally okay if you don't know some answers - that's what we're here to learn together! ✨
+                  </p>
+                </div>
+              </Card>
+
+              {/* Feature Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Card className="p-6 border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">💡</span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-bold text-lg">Smart Hints</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Get helpful clues when you're stuck
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 border-2 hover:border-secondary/50 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">📚</span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-bold text-lg">Step-by-Step</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Break down tricky problems together
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 border-2 hover:border-accent/50 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-accent/20 flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">💬</span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-bold text-lg">Ask Anything</h3>
+                      <p className="text-sm text-muted-foreground">
+                        No question is too small or silly
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl">⚡</span>
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="font-bold text-lg">Always Here</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Available whenever you need help
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* CTA Button */}
+              <div className="text-center pt-4">
+                <Button
+                  size="lg"
+                  onClick={handleProfessorIntroContinue}
+                  className="text-lg px-12 py-7 h-auto shadow-glow hover:shadow-purple transition-all duration-300 hover:scale-105"
+                  variant="fun"
+                >
+                  🚀 Let's Begin the Pre-Assessment!
+                </Button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Notice Dialog */}
       <AlertDialog open={showNotice} onOpenChange={setShowNotice}>
         <AlertDialogContent className="max-w-2xl">
@@ -203,12 +312,6 @@ const PreAssessment = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* Tutor Introduction */}
-      <TutorIntro 
-        open={showTutorIntro} 
-        onOpenChange={setShowTutorIntro}
-        onContinue={handleTutorIntroContinue}
-      />
 
       {/* Calculator */}
       <Calculator open={showCalculator} onOpenChange={setShowCalculator} />
