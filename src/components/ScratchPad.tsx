@@ -11,27 +11,36 @@ interface ScratchPadProps {
 export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawing = useRef(false);
+  const contextRef = useRef<CanvasRenderingContext2D | null>(null);
 
   useEffect(() => {
+    if (!open) return;
+    
     const canvas = canvasRef.current;
-    if (!canvas || !open) return;
+    if (!canvas) return;
+
+    // Set fixed dimensions
+    canvas.width = 600;
+    canvas.height = 400;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas size properly
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-
-    // Set up canvas
+    // Set up canvas context
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.lineWidth = 3;
     ctx.strokeStyle = "#000";
+    contextRef.current = ctx;
 
     const startDrawing = (e: MouseEvent | TouchEvent) => {
+      const ctx = contextRef.current;
+      if (!ctx) return;
+      
       isDrawing.current = true;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
       const rect = canvas.getBoundingClientRect();
       const x = 'touches' in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
       const y = 'touches' in e ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
@@ -41,7 +50,13 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
 
     const draw = (e: MouseEvent | TouchEvent) => {
       if (!isDrawing.current) return;
+      const ctx = contextRef.current;
+      if (!ctx) return;
+      
       e.preventDefault();
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      
       const rect = canvas.getBoundingClientRect();
       const x = 'touches' in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
       const y = 'touches' in e ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
@@ -51,7 +66,8 @@ export const ScratchPad = ({ open, onOpenChange }: ScratchPadProps) => {
 
     const stopDrawing = () => {
       isDrawing.current = false;
-      ctx.closePath();
+      const ctx = contextRef.current;
+      if (ctx) ctx.closePath();
     };
 
     canvas.addEventListener("mousedown", startDrawing);

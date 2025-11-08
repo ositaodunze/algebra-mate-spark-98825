@@ -3,9 +3,10 @@ import { Header } from "@/components/Header";
 import { LearningSection } from "@/components/LearningSection";
 import { ProgressStepper } from "@/components/ProgressStepper";
 import { VideoPlayer } from "@/components/VideoPlayer";
-import { DiscussionQuestions } from "@/components/DiscussionQuestions";
 import { AssessmentQuiz } from "@/components/AssessmentQuiz";
 import { AIAssistant } from "@/components/AIAssistant";
+import { GuidedProblem } from "@/components/GuidedProblem";
+import { BottomChat } from "@/components/BottomChat";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -374,7 +375,7 @@ const Index = () => {
       <LearningSection
         id="discussion"
         title="Guided Practice"
-        subtitle="Ask questions and get help from your AI tutor"
+        subtitle="Let's practice step-by-step with progressively less help"
       >
         {isSectionLocked(4) ? (
           <Card className="p-12 text-center bg-muted/50">
@@ -393,7 +394,88 @@ const Index = () => {
             </Button>
           </Card>
         ) : (
-          <DiscussionQuestions onComplete={() => markSectionComplete("discussion")} />
+          <div className="space-y-6">
+            <GuidedProblem
+              problemNumber={1}
+              title="Identifying Parts of an Expression"
+              description="Let me show you how to break down an algebraic expression into its parts."
+              mode="watch"
+              steps={[
+                {
+                  question: "Look at the expression: 3x + 7",
+                  correctApproach: "First, I identify the variable. Here, 'x' is our variable - it represents an unknown number."
+                },
+                {
+                  question: "What is the coefficient?",
+                  correctApproach: "The coefficient is 3. It's the number being multiplied by our variable x."
+                },
+                {
+                  question: "What about the constant?",
+                  correctApproach: "The constant is 7. It's the number that stands alone without a variable."
+                }
+              ]}
+              onComplete={() => {}}
+            />
+
+            <GuidedProblem
+              problemNumber={2}
+              title="Combining Like Terms"
+              description="Now let's work together to simplify: 5y + 2y + 3"
+              mode="together"
+              steps={[
+                {
+                  question: "Which terms can we combine?",
+                  type: "multiple-choice",
+                  options: ["5y and 2y", "2y and 3", "5y and 3", "All of them"],
+                  correctAnswer: 0,
+                  hint: "Like terms have the same variable",
+                  correctApproach: "We can combine 5y and 2y because they both have the variable 'y'."
+                },
+                {
+                  question: "What is 5y + 2y?",
+                  type: "fill-blank",
+                  blankLabel: "Answer:",
+                  hint: "Add the coefficients: 5 + 2",
+                  correctApproach: "5y + 2y = 7y. We add the coefficients (5 + 2 = 7) and keep the variable."
+                },
+                {
+                  question: "What is our final simplified expression?",
+                  type: "fill-blank",
+                  blankLabel: "Final answer:",
+                  correctApproach: "The final answer is 7y + 3. The constant 3 stays separate."
+                }
+              ]}
+              onComplete={() => {}}
+            />
+
+            <GuidedProblem
+              problemNumber={3}
+              title="Your Turn!"
+              description="Simplify this expression on your own: 4a + 6 + 2a"
+              mode="independent"
+              steps={[
+                {
+                  question: "First, identify the like terms",
+                  type: "multiple-choice",
+                  options: ["4a and 6", "6 and 2a", "4a and 2a", "All are like terms"],
+                  correctApproach: "4a and 2a are like terms because they share the same variable 'a'."
+                },
+                {
+                  question: "Combine the like terms",
+                  type: "fill-blank",
+                  blankLabel: "4a + 2a = ",
+                  correctApproach: "4a + 2a = 6a"
+                },
+                {
+                  question: "Write the final simplified expression",
+                  type: "fill-blank",
+                  blankLabel: "Final answer:",
+                  correctApproach: "6a + 6 is the simplified form."
+                }
+              ]}
+              onComplete={() => markSectionComplete("discussion")}
+            />
+          </div>
         )}
       </LearningSection>
 
@@ -569,11 +651,13 @@ const Index = () => {
       </LearningSection>
 
       {/* Footer */}
-      <div className="bg-card border-t border-border py-8">
+      <div className="bg-card border-t border-border py-8 mb-20">
         <div className="container max-w-5xl mx-auto px-4 text-center text-muted-foreground">
           <p>Great work on completing this lesson! 🎉</p>
         </div>
       </div>
+
+      <BottomChat />
     </div>
   );
 };
