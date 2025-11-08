@@ -141,7 +141,7 @@ const PreAssessment = () => {
     <>
       {/* Professor Wise Introduction */}
       {showProfessorIntro && (
-        <div className="min-h-screen bg-gradient-to-b from-primary/5 via-secondary/5 to-background overflow-y-auto">
+        <div className="min-h-screen bg-background overflow-y-auto">
           <div className="container max-w-4xl mx-auto px-4 py-12">
             <div className="space-y-8 animate-slide-up">
               
@@ -160,7 +160,7 @@ const PreAssessment = () => {
               </div>
 
               {/* Challenge Box */}
-              <Card className="p-8 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5 shadow-xl">
+              <Card className="p-8 border-2 border-primary/20 shadow-xl">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">🎮</span>
@@ -176,65 +176,6 @@ const PreAssessment = () => {
                   </p>
                 </div>
               </Card>
-
-              {/* Feature Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="p-6 border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">💡</span>
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="font-bold text-lg">Smart Hints</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Get helpful clues when you're stuck
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 border-2 hover:border-secondary/50 transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">📚</span>
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="font-bold text-lg">Step-by-Step</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Break down tricky problems together
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 border-2 hover:border-accent/50 transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-accent/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">💬</span>
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="font-bold text-lg">Ask Anything</h3>
-                      <p className="text-sm text-muted-foreground">
-                        No question is too small or silly
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 border-2 hover:border-primary/50 transition-all duration-300 hover:scale-105">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl">⚡</span>
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="font-bold text-lg">Always Here</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Available whenever you need help
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
 
               {/* CTA Button */}
               <div className="text-center pt-4">

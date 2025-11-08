@@ -62,25 +62,24 @@ const JourneyIntro = () => {
             }
           />
           {/* Points Display Card */}
-          <Card className="p-8 md:p-10 shadow-glow bg-gradient-to-br from-accent/20 via-primary/10 to-secondary/20 border-3 border-accent/30 relative overflow-hidden">
-            <div className="absolute top-0 right-0 text-9xl opacity-5">🏆</div>
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <Card className="p-6 shadow-medium border-2 border-accent/30">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="text-center md:text-left">
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-3 justify-center md:justify-start">
-                  <Zap className="w-8 h-8 text-accent animate-pulse" />
+                <h2 className="text-2xl font-bold mb-2 flex items-center gap-2 justify-center md:justify-start">
+                  <Zap className="w-6 h-6 text-accent" />
                   Points Earned!
                 </h2>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   You're officially on the path to math mastery! 🚀
                 </p>
               </div>
-              <div className="text-center bg-background/90 backdrop-blur-sm rounded-3xl p-8 shadow-medium border-2 border-accent/20 min-w-[200px]">
-                <div className="flex items-center gap-3 justify-center mb-3">
-                  <Star className="w-10 h-10 text-accent fill-accent animate-pulse" />
-                  <p className="text-6xl font-bold bg-gradient-primary bg-clip-text text-transparent">{points}</p>
+              <div className="text-center bg-accent/5 rounded-2xl p-6 shadow-sm border border-accent/20">
+                <div className="flex items-center gap-2 justify-center mb-2">
+                  <Star className="w-8 h-8 text-accent fill-accent" />
+                  <p className="text-5xl font-bold text-primary">{points}</p>
                 </div>
-                <p className="text-sm font-bold text-accent uppercase tracking-wider">Points</p>
-                <Badge className="mt-3 bg-success">Beginner Level</Badge>
+                <p className="text-xs font-bold text-accent uppercase tracking-wider">Points</p>
+                <Badge className="mt-2 bg-success text-xs">Beginner Level</Badge>
               </div>
             </div>
           </Card>
@@ -104,7 +103,7 @@ const JourneyIntro = () => {
           />
 
           {/* First Lesson Card */}
-          <Card className="p-8 md:p-10 shadow-medium bg-gradient-to-br from-primary/5 to-secondary/5 border-3 border-primary/30">
+          <Card className="p-6 md:p-8 shadow-medium border-2 border-primary/30">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shrink-0 shadow-medium">
                 <Target className="w-7 h-7 text-white" />
