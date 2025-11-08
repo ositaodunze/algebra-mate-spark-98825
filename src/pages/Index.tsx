@@ -117,6 +117,16 @@ const Index = () => {
   const markSectionComplete = (sectionId: string) => {
     if (!completedSections.includes(sectionId)) {
       setCompletedSections([...completedSections, sectionId]);
+      
+      // Auto-scroll to next section
+      const currentIndex = steps.findIndex(step => step.id === sectionId);
+      if (currentIndex !== -1 && currentIndex < steps.length - 1) {
+        setTimeout(() => {
+          const nextStepId = steps[currentIndex + 1].id;
+          const nextElement = document.getElementById(nextStepId);
+          nextElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 500);
+      }
     }
   };
 
@@ -387,12 +397,6 @@ const Index = () => {
             <p className="text-muted-foreground mb-4">
               Complete the previous section to unlock guided practice!
             </p>
-            <Button 
-              onClick={() => markSectionComplete(steps[3].id)}
-              className="mt-2"
-            >
-              Unlock Section (Dev Mode)
-            </Button>
           </Card>
         ) : (
           <div className="space-y-6">
@@ -489,12 +493,6 @@ const Index = () => {
             <p className="text-muted-foreground mb-4">
               Complete the guided practice to unlock these problems!
             </p>
-            <Button 
-              onClick={() => markSectionComplete(steps[4].id)}
-              className="mt-2"
-            >
-              Unlock Section (Dev Mode)
-            </Button>
           </Card>
         ) : (
           <AssessmentQuiz 
@@ -629,12 +627,6 @@ const Index = () => {
             <p className="text-muted-foreground mb-4">
               Complete all previous sections to unlock the final assessment!
             </p>
-            <Button 
-              onClick={() => markSectionComplete(steps[6].id)}
-              className="mt-2"
-            >
-              Unlock Section (Dev Mode)
-            </Button>
           </Card>
         ) : (
           <AssessmentQuiz 
