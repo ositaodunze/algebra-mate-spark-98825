@@ -16,28 +16,31 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
       <div className="container max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate('/journey-intro')}
-          className="gap-2"
-        >
-          <Home className="w-5 h-5" />
-          Home
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => navigate('/personalization')}
-          className="gap-2"
-        >
-          {userAvatar && (
-            <Avatar className="w-6 h-6">
-              <AvatarFallback className="text-sm">{userAvatar}</AvatarFallback>
-            </Avatar>
-          )}
-          Account
-        </Button>
+        <h1 className="text-xl font-bold text-foreground">Math4You</h1>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate('/journey-intro')}
+            className="gap-2"
+          >
+            <Home className="w-5 h-5" />
+            Home
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate('/personalization')}
+            className="gap-2"
+          >
+            {userAvatar && (
+              <Avatar className="w-6 h-6">
+                <AvatarFallback className="text-sm">{userAvatar}</AvatarFallback>
+              </Avatar>
+            )}
+            Account
+          </Button>
+        </div>
       </div>
     </header>
   );

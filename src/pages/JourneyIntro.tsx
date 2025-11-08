@@ -109,8 +109,6 @@ const JourneyIntro = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
       {/* Welcome Section */}
       <div className="border-b border-border bg-card">
         <div className="container max-w-7xl mx-auto px-4 py-6">
@@ -156,13 +154,13 @@ const JourneyIntro = () => {
               <div className="flex items-start gap-3 mb-3">
                 <Shield className="w-8 h-8 text-muted-foreground" />
                 <div className="flex-1">
-                  <h3 className="font-bold text-sm mb-1">UNLOCK LEAGUES</h3>
+                  <h3 className="font-bold text-sm mb-1">UNLOCK NEXT BADGE</h3>
                   <p className="text-2xl font-bold">{totalXP} of 175 XP</p>
                 </div>
               </div>
               <Progress value={(totalXP / 175) * 100} className="h-2" />
               <p className="text-xs text-muted-foreground mt-2">
-                Complete lessons to unlock competitive leagues!
+                Complete lessons to earn your next badge!
               </p>
             </Card>
 
