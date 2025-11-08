@@ -135,7 +135,7 @@ const JourneyIntro = () => {
           {/* Action Button */}
           <div className="text-center">
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/lesson")}
               size="lg"
               className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
             >
