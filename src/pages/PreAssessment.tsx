@@ -304,7 +304,7 @@ const PreAssessment = () => {
             {/* Score and Timer Header */}
             <div className="flex justify-between items-center mb-6">
               <Card className="px-6 py-3 flex items-center gap-3 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
-                <Trophy className="w-6 h-6 text-primary animate-pulse" />
+                <Trophy className="w-6 h-6 text-primary" />
                 <div>
                   <p className="text-xs text-muted-foreground">Score</p>
                   <p className="text-2xl font-bold text-primary">{score}</p>
@@ -312,7 +312,7 @@ const PreAssessment = () => {
               </Card>
               
               <Card className={`px-6 py-3 flex items-center gap-3 border-2 ${
-                timeLeft <= 10 ? 'border-destructive/50 bg-destructive/10 animate-pulse' : 'border-accent/20 bg-accent/5'
+                timeLeft <= 10 ? 'border-destructive/50 bg-destructive/10' : 'border-accent/20 bg-accent/5'
               }`}>
                 <Timer className={`w-6 h-6 ${timeLeft <= 10 ? 'text-destructive' : 'text-accent'}`} />
                 <div>
@@ -363,7 +363,7 @@ const PreAssessment = () => {
                       
                       let buttonClass = `relative h-32 rounded-2xl border-4 transition-all duration-300 ${color.text} font-bold text-lg
                         ${!showResult ? `bg-gradient-to-br ${color.bg} ${color.hover} ${color.border} hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl` : ''}
-                        ${showResult && isCorrectAnswer ? 'bg-gradient-to-br from-green-400 to-green-600 border-green-500 scale-105 animate-pulse' : ''}
+                        ${showResult && isCorrectAnswer ? 'bg-gradient-to-br from-green-400 to-green-600 border-green-500 scale-105' : ''}
                         ${showResult && isSelected && !isCorrect ? 'bg-gradient-to-br from-gray-400 to-gray-600 border-gray-500 opacity-50' : ''}
                         ${showResult && !isSelected && !isCorrectAnswer ? 'opacity-40' : ''}
                       `;
