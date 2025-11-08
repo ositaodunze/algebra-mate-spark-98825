@@ -308,9 +308,15 @@ const Index = () => {
               <span className="text-3xl">🔒</span>
             </div>
             <h3 className="text-xl font-bold mb-2">Section Locked</h3>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               Complete the previous section to unlock guided practice!
             </p>
+            <Button 
+              onClick={() => markSectionComplete(steps[3].id)}
+              className="mt-2"
+            >
+              Unlock Section (Dev Mode)
+            </Button>
           </Card>
         ) : (
           <DiscussionQuestions onComplete={() => markSectionComplete("discussion")} />
@@ -330,9 +336,15 @@ const Index = () => {
               <span className="text-3xl">🔒</span>
             </div>
             <h3 className="text-xl font-bold mb-2">Section Locked</h3>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               Complete the guided practice to unlock these problems!
             </p>
+            <Button 
+              onClick={() => markSectionComplete(steps[4].id)}
+              className="mt-2"
+            >
+              Unlock Section (Dev Mode)
+            </Button>
           </Card>
         ) : (
           <AssessmentQuiz 
@@ -464,9 +476,15 @@ const Index = () => {
               <span className="text-3xl">🔒</span>
             </div>
             <h3 className="text-xl font-bold mb-2">Assessment Locked</h3>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               Complete all previous sections to unlock the final assessment!
             </p>
+            <Button 
+              onClick={() => markSectionComplete(steps[6].id)}
+              className="mt-2"
+            >
+              Unlock Section (Dev Mode)
+            </Button>
           </Card>
         ) : (
           <AssessmentQuiz 
