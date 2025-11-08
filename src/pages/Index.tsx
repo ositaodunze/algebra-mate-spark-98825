@@ -425,23 +425,16 @@ const Index = () => {
               steps={[
                 {
                   question: "Which terms can we combine?",
-                  type: "multiple-choice",
-                  options: ["5y and 2y", "2y and 3", "5y and 3", "All of them"],
-                  correctAnswer: 0,
                   hint: "Like terms have the same variable",
                   correctApproach: "We can combine 5y and 2y because they both have the variable 'y'."
                 },
                 {
                   question: "What is 5y + 2y?",
-                  type: "fill-blank",
-                  blankLabel: "Answer:",
                   hint: "Add the coefficients: 5 + 2",
                   correctApproach: "5y + 2y = 7y. We add the coefficients (5 + 2 = 7) and keep the variable."
                 },
                 {
                   question: "What is our final simplified expression?",
-                  type: "fill-blank",
-                  blankLabel: "Final answer:",
                   correctApproach: "The final answer is 7y + 3. The constant 3 stays separate."
                 }
               ]}
@@ -456,20 +449,14 @@ const Index = () => {
               steps={[
                 {
                   question: "First, identify the like terms",
-                  type: "multiple-choice",
-                  options: ["4a and 6", "6 and 2a", "4a and 2a", "All are like terms"],
                   correctApproach: "4a and 2a are like terms because they share the same variable 'a'."
                 },
                 {
-                  question: "Combine the like terms",
-                  type: "fill-blank",
-                  blankLabel: "4a + 2a = ",
+                  question: "Combine the like terms (4a + 2a = ?)",
                   correctApproach: "4a + 2a = 6a"
                 },
                 {
                   question: "Write the final simplified expression",
-                  type: "fill-blank",
-                  blankLabel: "Final answer:",
                   correctApproach: "6a + 6 is the simplified form."
                 }
               ]}

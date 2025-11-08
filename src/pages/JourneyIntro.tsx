@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Flame, Shield, Trophy, Target, Lock, BookOpen, Brain, Zap, Award, TrendingUp } from "lucide-react";
 import { Header } from "@/components/Header";
+import expressionsImage from "@/assets/journey-expressions.png";
 
 const JourneyIntro = () => {
   const navigate = useNavigate();
