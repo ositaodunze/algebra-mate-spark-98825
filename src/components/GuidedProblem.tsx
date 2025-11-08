@@ -32,7 +32,6 @@ export const GuidedProblem = ({
   const [userAnswer, setUserAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [hasQuestions, setHasQuestions] = useState<boolean | null>(null);
 
   const currentStepData = steps[currentStep];
   const isLastStep = currentStep === steps.length - 1;
@@ -44,7 +43,6 @@ export const GuidedProblem = ({
       setCurrentStep(currentStep + 1);
       setUserAnswer("");
       setShowHint(false);
-      setHasQuestions(null);
     }
   };
 
@@ -74,36 +72,15 @@ export const GuidedProblem = ({
               <p className="text-muted-foreground">{currentStepData.correctApproach}</p>
             </div>
 
-            {hasQuestions === null && currentStep === steps.length - 1 && (
-              <div className="space-y-3">
-                <p className="font-medium">Do you have any questions about what I just showed you?</p>
-                <div className="flex gap-3">
-                  <Button onClick={() => setHasQuestions(true)} variant="outline">
-                    Yes, I have questions
-                  </Button>
-                  <Button onClick={() => { setHasQuestions(false); handleNext(); }} variant="fun">
-                    No, I understand! Let's continue
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {hasQuestions === true && (
-              <div className="space-y-3">
-                <Textarea
-                  placeholder="Ask me anything about this problem..."
-                  className="min-h-24"
-                />
-                <Button variant="fun" className="w-full">
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  Ask AI Tutor
-                </Button>
-              </div>
-            )}
-
-            {hasQuestions === null && currentStep < steps.length - 1 && (
+            {currentStep < steps.length - 1 && (
               <Button onClick={handleNext} variant="fun">
                 Next Step <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            )}
+            
+            {currentStep === steps.length - 1 && (
+              <Button onClick={handleNext} variant="fun">
+                Continue <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             )}
           </div>

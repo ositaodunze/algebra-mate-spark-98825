@@ -22,8 +22,8 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={<Auth />} />
+          <Route path="/welcome" element={<Welcome />} />
           <Route path="/personalization" element={<Personalization />} />
           <Route path="/lesson" element={<Index />} />
           <Route path="/pre-assessment" element={<PreAssessment />} />
