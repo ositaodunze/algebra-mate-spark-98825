@@ -16,8 +16,14 @@ const Personalization = () => {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
   const avatars = [
-    "👩🏽‍🦱", "👩🏻‍🎤", "👨🏻‍🦱", "👨🏾", 
-    "👨🏻‍✈️", "👩🏾‍🦱", "👩🏽‍🎤", "👨🏼"
+    { name: "Alex", emoji: "🧑‍🎓", bg: "from-blue-500 to-blue-600" },
+    { name: "Sam", emoji: "👨‍💻", bg: "from-green-500 to-green-600" },
+    { name: "Jordan", emoji: "👩‍🔬", bg: "from-purple-500 to-purple-600" },
+    { name: "Taylor", emoji: "🧑‍🎨", bg: "from-pink-500 to-pink-600" },
+    { name: "Casey", emoji: "👨‍🚀", bg: "from-orange-500 to-orange-600" },
+    { name: "Riley", emoji: "👩‍🏫", bg: "from-teal-500 to-teal-600" },
+    { name: "Morgan", emoji: "🧑‍🔧", bg: "from-red-500 to-red-600" },
+    { name: "Avery", emoji: "👨‍🎤", bg: "from-indigo-500 to-indigo-600" },
   ];
 
   const companions = [
@@ -100,18 +106,23 @@ const Personalization = () => {
               <p className="text-muted-foreground mb-8 text-center">
                 Select an avatar that represents you
               </p>
-              <div className="grid grid-cols-4 gap-6 max-w-2xl mx-auto mb-8">
+              <div className="grid grid-cols-4 gap-6 max-w-3xl mx-auto mb-8">
                 {avatars.map((avatar, index) => (
                   <div
                     key={index}
                     onClick={() => setSelectedAvatar(index)}
                     className={`
-                      flex items-center justify-center cursor-pointer rounded-full
-                      transition-all hover:scale-110 p-2
-                      ${selectedAvatar === index ? "ring-4 ring-primary bg-primary/10" : "hover:ring-2 hover:ring-primary/50"}
+                      flex flex-col items-center gap-3 cursor-pointer rounded-2xl p-4
+                      transition-all hover:scale-105 border-2
+                      ${selectedAvatar === index 
+                        ? "border-primary bg-primary/10 shadow-lg" 
+                        : "border-border hover:border-primary/50"}
                     `}
                   >
-                    <div className="text-6xl">{avatar}</div>
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${avatar.bg} flex items-center justify-center text-3xl`}>
+                      {avatar.emoji}
+                    </div>
+                    <span className="text-sm font-medium">{avatar.name}</span>
                   </div>
                 ))}
               </div>

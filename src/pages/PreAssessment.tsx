@@ -141,24 +141,58 @@ const PreAssessment = () => {
     <>
       {/* Notice Dialog */}
       <AlertDialog open={showNotice} onOpenChange={setShowNotice}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-2xl text-primary">Notice!</AlertDialogTitle>
-            <AlertDialogDescription className="text-base space-y-4">
-              <p>
-                You are about to continue to the Pretest Section of Math4U, are you ready?
+        <AlertDialogContent className="max-w-2xl">
+          <AlertDialogHeader className="space-y-6">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center">
+                <Brain className="w-10 h-10 text-primary" />
+              </div>
+              <AlertDialogTitle className="text-3xl font-bold">Ready to Begin?</AlertDialogTitle>
+            </div>
+            <AlertDialogDescription className="text-base space-y-4 text-center">
+              <p className="text-lg">
+                You're about to start the <strong>Math4U Pre-Assessment</strong>.
               </p>
-              <p className="italic text-sm">
-                Choosing no will log you out.
+              <div className="bg-muted/50 rounded-lg p-6 space-y-3 text-left">
+                <p className="font-semibold text-foreground">What to expect:</p>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">✓</span>
+                    <span>10 questions covering key Algebra 1 concepts</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">✓</span>
+                    <span>Use the calculator and scratch pad tools to help you</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">✓</span>
+                    <span>Your AI tutor is available if you need guidance</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5">✓</span>
+                    <span>Don't worry about perfection - this helps us personalize your journey!</span>
+                  </li>
+                </ul>
+              </div>
+              <p className="text-sm text-muted-foreground italic">
+                Take your time and do your best. Ready when you are!
               </p>
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <Button variant="destructive" onClick={() => handleNoticeResponse(false)}>
-              No
+          <AlertDialogFooter className="flex-col sm:flex-row gap-3 mt-4">
+            <Button 
+              variant="outline" 
+              onClick={() => handleNoticeResponse(false)}
+              className="w-full sm:w-auto"
+            >
+              Not Yet
             </Button>
-            <Button className="bg-success hover:bg-success/90" onClick={() => handleNoticeResponse(true)}>
-              Yes
+            <Button 
+              className="bg-primary hover:bg-primary/90 w-full sm:w-auto" 
+              onClick={() => handleNoticeResponse(true)}
+              size="lg"
+            >
+              I'm Ready!
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -197,7 +231,7 @@ const PreAssessment = () => {
               </div>
             </div>
 
-            <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2">
+            <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-2">
               <Button
                 variant="outline"
                 size="icon"

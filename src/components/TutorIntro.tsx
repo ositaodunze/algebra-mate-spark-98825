@@ -10,48 +10,68 @@ interface TutorIntroProps {
 }
 
 export const TutorIntro = ({ open, onOpenChange, onContinue }: TutorIntroProps) => {
+  const companionName = localStorage.getItem("userCompanion") || "Your AI Tutor";
+  
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl">
-        <div className="flex flex-col items-center text-center space-y-6 py-6">
+      <DialogContent className="sm:max-w-2xl">
+        <div className="flex flex-col items-center text-center space-y-6 py-8 px-4">
+          {/* Avatar */}
           <div className="relative">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-              <Bot className="w-12 h-12 text-white" />
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary via-primary/90 to-primary/70 flex items-center justify-center shadow-xl">
+              <Bot className="w-16 h-16 text-white" />
             </div>
-            <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-success rounded-full flex items-center justify-center">
-              <span className="text-white text-xl">👋</span>
+            <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-success rounded-full flex items-center justify-center border-4 border-background shadow-lg">
+              <span className="text-white text-2xl">👋</span>
             </div>
           </div>
           
-          <div className="space-y-3">
-            <h2 className="text-2xl font-bold text-primary">Hi! I'm Your AI Tutor</h2>
-            <p className="text-muted-foreground max-w-md">
-              I'm here to help you throughout your learning journey! I'll provide hints, 
-              explanations, and support whenever you need it during your assessment and lessons.
+          {/* Greeting */}
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold text-foreground">
+              Hi! I'm {companionName}
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
+              I'm your personal AI math tutor, and I'm excited to be part of your learning journey! 
+              Think of me as your always-available study buddy who's here to help you succeed.
             </p>
           </div>
 
-          <div className="bg-primary/10 rounded-lg p-4 w-full space-y-2">
-            <p className="font-semibold text-sm">I can help you with:</p>
-            <ul className="text-sm text-muted-foreground space-y-1 text-left">
-              <li className="flex items-center gap-2">
-                <span className="text-primary">✓</span> Understanding difficult concepts
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">✓</span> Breaking down complex problems
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">✓</span> Providing step-by-step guidance
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-primary">✓</span> Answering your questions anytime
-              </li>
-            </ul>
+          {/* Features Grid */}
+          <div className="grid grid-cols-2 gap-4 w-full max-w-lg mt-4">
+            <div className="bg-card rounded-xl p-4 border border-border text-left">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+                <span className="text-primary text-xl">💡</span>
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Smart Hints</h3>
+              <p className="text-xs text-muted-foreground">Get helpful hints without giving away the answer</p>
+            </div>
+            <div className="bg-card rounded-xl p-4 border border-border text-left">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+                <span className="text-primary text-xl">📚</span>
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Step-by-Step</h3>
+              <p className="text-xs text-muted-foreground">Break down complex problems into easy steps</p>
+            </div>
+            <div className="bg-card rounded-xl p-4 border border-border text-left">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+                <span className="text-primary text-xl">💬</span>
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Ask Anything</h3>
+              <p className="text-xs text-muted-foreground">No question is too small or too big</p>
+            </div>
+            <div className="bg-card rounded-xl p-4 border border-border text-left">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+                <span className="text-primary text-xl">⚡</span>
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Instant Help</h3>
+              <p className="text-xs text-muted-foreground">Available 24/7 whenever you need support</p>
+            </div>
           </div>
 
           <Button 
             onClick={onContinue}
-            className="bg-primary hover:bg-primary/90 w-full"
+            className="bg-primary hover:bg-primary/90 w-full mt-6"
             size="lg"
           >
             Let's Get Started!
