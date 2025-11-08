@@ -8,55 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 205 100% 97%;
-    --foreground: 230 35% 15%;
+    --background: 220 70% 97%;
+    --foreground: 230 45% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 230 35% 15%;
+    --card-foreground: 230 45% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 230 35% 15%;
+    --popover-foreground: 230 45% 20%;
 
-    --primary: 195 85% 55%;
+    --primary: 200 95% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 195 85% 75%;
+    --primary-glow: 200 95% 75%;
 
-    --secondary: 285 80% 65%;
+    --secondary: 280 85% 62%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 205 40% 92%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 220 60% 95%;
+    --muted-foreground: 220 20% 55%;
 
-    --accent: 35 95% 60%;
+    --accent: 35 100% 55%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 145 80% 50%;
+    --success: 145 85% 48%;
     --success-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 90% 62%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 205 30% 88%;
-    --input: 205 30% 92%;
-    --ring: 195 85% 55%;
+    --border: 220 40% 90%;
+    --input: 220 50% 94%;
+    --ring: 200 95% 55%;
 
-    --radius: 1rem;
+    --radius: 1.25rem;
 
-    /* Learning style colors */
-    --visual: 265 85% 65%;
-    --verbal: 145 80% 50%;
-    --logical: 220 90% 60%;
-    --kinesthetic: 35 95% 60%;
+    /* Learning style colors - Bright and Fun! */
+    --visual: 270 90% 62%;
+    --verbal: 145 85% 48%;
+    --logical: 220 95% 58%;
+    --kinesthetic: 35 100% 55%;
 
-    /* Custom gradients - Playful and fun for middle schoolers */
-    --gradient-primary: linear-gradient(135deg, hsl(195 85% 55%), hsl(285 80% 65%));
-    --gradient-secondary: linear-gradient(135deg, hsl(35 95% 60%), hsl(15 90% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(195 85% 55%) 0%, hsl(285 80% 65%) 50%, hsl(35 95% 60%) 100%);
+    /* Playful gradients for middle schoolers */
+    --gradient-primary: linear-gradient(135deg, hsl(200 95% 55%), hsl(280 85% 62%));
+    --gradient-secondary: linear-gradient(135deg, hsl(35 100% 55%), hsl(15 95% 62%));
+    --gradient-hero: linear-gradient(135deg, hsl(200 95% 55%) 0%, hsl(280 85% 62%) 50%, hsl(35 100% 55%) 100%);
+    --gradient-fun: linear-gradient(135deg, hsl(145 85% 48%), hsl(200 95% 55%));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 70% 98%));
 
-    /* Shadows - Softer and more playful */
-    --shadow-soft: 0 2px 12px hsl(195 85% 55% / 0.15);
-    --shadow-medium: 0 4px 20px hsl(195 85% 55% / 0.25);
-    --shadow-glow: 0 8px 40px hsl(195 85% 55% / 0.4);
+    /* Vibrant shadows with color! */
+    --shadow-soft: 0 4px 16px hsl(200 95% 55% / 0.12);
+    --shadow-medium: 0 8px 24px hsl(200 95% 55% / 0.18);
+    --shadow-glow: 0 12px 40px hsl(200 95% 55% / 0.3);
+    --shadow-purple: 0 8px 24px hsl(280 85% 62% / 0.25);
+    --shadow-orange: 0 8px 24px hsl(35 100% 55% / 0.25);
+
+    /* Fun patterns */
+    --pattern-dots: radial-gradient(circle, hsl(200 95% 55% / 0.08) 1px, transparent 1px);
+    --pattern-size: 20px 20px;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -118,6 +126,35 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    background-image: var(--pattern-dots);
+    background-size: var(--pattern-size);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  /* Fun animated underlines */
+  .fun-link {
+    @apply relative inline-block transition-colors;
+  }
+  
+  .fun-link::after {
+    @apply content-[''] absolute w-full scale-x-0 h-1 bottom-0 left-0 bg-primary origin-bottom-right transition-transform duration-300 rounded-full;
+  }
+  
+  .fun-link:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
+
+  /* Bounce animation for interactive elements */
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .bounce-hover:hover {
+    animation: bounce-gentle 0.6s ease-in-out;
   }
 }
