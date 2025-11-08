@@ -23,7 +23,6 @@ const PreAssessment = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
-  const [showNotice, setShowNotice] = useState(false);
   const [showProfessorIntro, setShowProfessorIntro] = useState(true);
   const [showCalculator, setShowCalculator] = useState(false);
   const [showScratchPad, setShowScratchPad] = useState(false);
@@ -106,16 +105,7 @@ const PreAssessment = () => {
 
   const handleProfessorIntroContinue = () => {
     setShowProfessorIntro(false);
-    setShowNotice(true);
-  };
-
-  const handleNoticeResponse = (ready: boolean) => {
-    if (ready) {
-      setShowNotice(false);
-      setHasStarted(true);
-    } else {
-      navigate("/");
-    }
+    setHasStarted(true);
   };
 
   const handleAnswerSelect = (index: number) => {
@@ -193,59 +183,6 @@ const PreAssessment = () => {
           </div>
         </div>
       )}
-
-      {/* Notice Dialog */}
-      <AlertDialog open={showNotice} onOpenChange={setShowNotice}>
-        <AlertDialogContent className="max-w-2xl">
-          <AlertDialogHeader className="space-y-6">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <AlertDialogTitle className="text-3xl font-bold">Ready to Begin?</AlertDialogTitle>
-            </div>
-            <AlertDialogDescription className="text-base space-y-4 text-center">
-              <p className="text-lg">
-                You're about to start the <strong>Math4You Pre-Assessment</strong>.
-              </p>
-              <div className="bg-muted/50 rounded-lg p-6 space-y-3 text-left">
-                <p className="font-semibold text-foreground">What to expect:</p>
-                <ul className="space-y-2 text-sm">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">✓</span>
-                    <span>10 quick questions - answer at your own pace</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">✓</span>
-                    <span>No right or wrong - just exploring what you know!</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">✓</span>
-                    <span>Earn a special badge when you complete it</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-0.5">✓</span>
-                    <span>This helps us personalize your learning journey!</span>
-                  </li>
-              </ul>
-            </div>
-          </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="flex-col sm:flex-row gap-3 mt-4">
-            <Button 
-              variant="outline" 
-              onClick={() => handleNoticeResponse(false)}
-              className="w-full sm:w-auto"
-            >
-              Not Yet
-            </Button>
-            <Button 
-              className="bg-primary hover:bg-primary/90 w-full sm:w-auto" 
-              onClick={() => handleNoticeResponse(true)}
-              size="lg"
-            >
-              I'm Ready!
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
 
       {/* Calculator */}
       <Calculator open={showCalculator} onOpenChange={setShowCalculator} />
