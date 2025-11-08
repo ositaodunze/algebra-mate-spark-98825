@@ -38,19 +38,19 @@ export const BottomChat = () => {
     <div className="fixed bottom-0 left-0 right-0 z-50">
       {/* Expanded Chat */}
       {isExpanded && (
-        <Card className="mx-auto max-w-4xl mb-4 mx-4 shadow-2xl border-2">
-          <div className="flex items-center justify-between p-4 border-b bg-primary/5">
+        <Card className="mx-auto max-w-3xl mb-4 mx-4 shadow-2xl border-2">
+          <div className="flex items-center justify-between p-3 border-b bg-primary/5">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold">AI Math Tutor</h3>
+              <Sparkles className="w-4 h-4 text-primary" />
+              <h3 className="font-semibold text-sm">AI Math Tutor</h3>
             </div>
-            <Button variant="ghost" size="icon" onClick={() => setIsExpanded(false)}>
-              <X className="w-4 h-4" />
+            <Button variant="ghost" size="sm" onClick={() => setIsExpanded(false)}>
+              <X className="w-3 h-3" />
             </Button>
           </div>
 
           {/* Messages */}
-          <div className="h-64 overflow-y-auto p-4 space-y-3">
+          <div className="h-48 overflow-y-auto p-3 space-y-2">
             {messages.length === 0 ? (
               <div className="flex items-center justify-center h-full text-muted-foreground text-center">
                 <div>
@@ -95,7 +95,7 @@ export const BottomChat = () => {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t bg-background">
+          <div className="p-3 border-t bg-background">
             <div className="flex gap-2">
               <Input
                 value={input}
@@ -103,13 +103,14 @@ export const BottomChat = () => {
                 onKeyPress={handleKeyPress}
                 placeholder="Ask anything about the topic..."
                 disabled={isLoading}
+                className="text-sm"
               />
               <Button 
                 onClick={handleSend} 
-                size="icon"
+                size="sm"
                 disabled={!input.trim() || isLoading}
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3 h-3" />
               </Button>
             </div>
           </div>
